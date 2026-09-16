@@ -681,6 +681,9 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   .pri-hero-copy h1{font-size:52px}
 }
 
+
+.form-error{background:#fff5f5;color:#620004}
+#stayRequestSubmit[disabled]{opacity:.55;cursor:wait}
 </style>
 </head>
 <body id="top">
@@ -744,7 +747,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field"><label>Guests</label><select name="guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
       <button class="btn btn-black" type="submit">Explore stays</button>
     </form>
-    <div class="stay-search-note">Browse Sfera stays, choose your dates and continue to the current booking channel.</div>
+    <div class="stay-search-note">Browse Sfera stays, choose your dates and send a request directly to our team.</div>
   </div>
 </section>
 
@@ -915,8 +918,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   <div class="wrap direct-grid">
     <div>
       <div class="micro">Sfera Stays</div>
-      <h2>Find your stay. Book where you prefer.</h2>
-      <p>Explore Sfera-operated properties and rooms in one place, then continue to the booking channel that works best for you or send Sfera a stay request.</p>
+      <h2>Find your stay. Request directly with Sfera.</h2>
+      <p>Explore Sfera-operated properties and rooms in one place, then send your preferred room and dates directly to the Sfera team.</p>
     </div>
     <div class="booking-card">
       <div class="micro"><span class="red-dot"></span>Booking experience preview</div>
@@ -1015,8 +1018,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <p>Modern rooms and apartments in Prishtina with a simple, professionally managed stay experience. Browse PRI as one aparthotel, then choose the room that suits you.</p>
         <div>
           <button class="btn btn-black" onclick="scrollPri('priRooms')">View rooms</button>
-          <button class="btn" onclick="scrollPri('priAvailability')">Check availability</button>
-          <a class="btn" href="https://www.booking.com/hotel/xk/pri-aparthotel.html" target="_blank" rel="noopener">Booking.com</a>
+          <button class="btn" onclick="openStayRequest()">Request with Sfera</button>
         </div>
         <div class="pri-hero-tags">
           <span class="pri-tag">Operated by Sfera</span>
@@ -1082,7 +1084,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <div class="micro"><span class="red-dot"></span>Room inventory</div>
         <div>
           <h2>Choose your room.</h2>
-          <p>Browse all 19 rooms by floor. Every room uses the same information structure, with a direct route to its current Airbnb listing.</p>
+          <p>Browse all 19 rooms by floor. Every room follows the same information structure and can be requested directly from Sfera.</p>
         </div>
       </div>
       <div class="pri-filterbar">
@@ -1102,34 +1104,32 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   <section class="pri-section pri-avail" id="priAvailability">
     <div class="wrap pri-avail-grid">
       <div class="pri-avail-copy">
-        <div class="micro"><span class="red-dot"></span>Book your stay</div>
-        <h2>Choose your room, dates and booking option.</h2>
-        <p style="color:#363a3d;line-height:1.65">Select a PRI room and your travel dates. You can check that exact room on Airbnb, view PRI Aparthotel on Booking.com, or send a stay request directly to Sfera.</p>
+        <div class="micro"><span class="red-dot"></span>Request your stay</div>
+        <h2>Choose a room and send your request to Sfera.</h2>
+        <p style="color:#363a3d;line-height:1.65">Select your preferred room, dates and number of guests. The request goes directly to the Sfera team for confirmation.</p>
 
         <div class="temporary-flow">
-          <div><span>01</span><b>Choose a room</b><p>Browse the aparthotel by floor and open the room that suits you.</p></div>
-          <div><span>02</span><b>Add your dates</b><p>Use the same dates when you continue to Airbnb or Booking.com.</p></div>
-          <div><span>03</span><b>Confirm your stay</b><p>Book through your preferred channel or request manual confirmation from Sfera.</p></div>
+          <div><span>01</span><b>Choose a room</b><p>Browse PRI Aparthotel by floor and select the room you prefer.</p></div>
+          <div><span>02</span><b>Send your dates</b><p>Tell us when you want to stay and how many guests are travelling.</p></div>
+          <div><span>03</span><b>Sfera confirms</b><p>Our team checks availability and contacts you to confirm the reservation.</p></div>
         </div>
       </div>
       <div class="pri-avail-card">
-        <div class="micro">Stay details</div>
+        <div class="micro">Stay request</div>
         <h3 style="font-size:28px;font-weight:400;margin:8px 0 20px">Room + dates</h3>
         <div class="pri-avail-form">
           <div class="field full"><label>Room</label><select id="priAvailRoom"></select></div>
           <div class="field"><label>Check-in</label><input id="priCheckIn" type="date"></div>
           <div class="field"><label>Check-out</label><input id="priCheckOut" type="date"></div>
           <div class="field full"><label>Guests</label><select id="priGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
-          <button class="btn btn-black field full" type="button" onclick="checkPriLiveAvailability()">Check selected room on Airbnb</button>
-          <button class="btn field full" type="button" onclick="checkPriBooking()">View PRI on Booking.com</button>
-          <button class="btn field full" type="button" onclick="openStayRequest()">Request with Sfera</button>
+          <button class="btn btn-black field full" type="button" onclick="openStayRequest()">Request with Sfera</button>
         </div>
-        <div class="pri-channel-note">Airbnb opens the selected room. Booking.com opens the full PRI Aparthotel inventory for your dates.</div>
+        <div class="pri-channel-note">A Sfera team member will review the request and contact the guest before the reservation is confirmed.</div>
       </div>
     </div>
   </section>
 
-  <section class="pri-rules-section">
+<section class="pri-rules-section">
     <div class="wrap pri-rules-grid">
       <div>
         <div class="micro"><span class="red-dot"></span>House rules</div>
@@ -1154,7 +1154,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="footer-grid">
         <div><img class="footer-logo" src="data:image/png;base64,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" alt="Sfera"><p>PRI Aparthotel · Operated by Sfera.</p></div>
         <div><h4>Property</h4><a href="#" onclick="scrollPri('priRooms');return false;">Rooms</a><a href="#" onclick="scrollPri('priAvailability');return false;">Availability</a></div>
-        <div><h4>Booking</h4><a href="https://www.airbnb.com/rooms/1703510387631530141" target="_blank" rel="noopener">Airbnb</a><a href="https://www.booking.com/hotel/xk/pri-aparthotel.html" target="_blank" rel="noopener">Booking.com</a><a href="#" onclick="openStayRequest();return false;">Request with Sfera</a></div>
+        <div><h4>Booking</h4><a href="#" onclick="openStayRequest();return false;">Request with Sfera</a></div>
         <div><h4>Sfera</h4><p>Prishtina, Kosovo</p><p>mail@sfera.biz</p></div>
       </div>
     </div>
@@ -1174,9 +1174,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <div class="pri-detail-grid" id="priRoomDetails"></div>
         <div class="pri-amenities" id="priRoomAmenities"></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn btn-black" id="priRoomAirbnb" target="_blank" rel="noopener">View on Airbnb</a>
-          <a class="btn" href="https://www.booking.com/hotel/xk/pri-aparthotel.html" target="_blank" rel="noopener">Booking.com</a>
-          <button class="btn" onclick="closeModal('priRoomModal');scrollPri('priAvailability')">Check dates</button>
+          <button class="btn btn-black" id="priRoomRequestBtn" onclick="requestCurrentRoom()">Request with Sfera</button>
         </div>
         <div class="pri-source-note" id="priRoomSourceNote"></div>
       </div>
@@ -1187,18 +1185,23 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
 <div class="modal" id="stayRequestModal" onclick="outsideClose(event,'stayRequestModal')">
   <div class="modal-card">
-    <div class="modal-head"><div><div class="micro"><span class="red-dot"></span>Sfera stay request</div><h3>Request a stay.</h3></div><button class="close" onclick="closeModal('stayRequestModal')">×</button></div>
-    <form class="booking-form" onsubmit="submitStayRequest(event,this)">
-      <div class="field"><label>Name</label><input required placeholder="Guest name"></div>
-      <div class="field"><label>WhatsApp / phone</label><input required placeholder="+383 ..."></div>
-      <div class="field full"><label>Email</label><input type="email" placeholder="guest@email.com"></div>
-      <div class="field"><label>Room</label><select id="requestRoom"></select></div>
-      <div class="field"><label>Guests</label><select id="requestGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
-      <div class="field"><label>Check-in</label><input id="requestIn" type="date"></div>
-      <div class="field"><label>Check-out</label><input id="requestOut" type="date"></div>
-      <div class="field full"><label>Message</label><textarea placeholder="Optional"></textarea></div>
-      <button class="btn btn-black field full" type="submit">Send stay request</button>
-      <div class="form-success">Preview submitted. Before launch, this form will be routed to the Sfera inbox / guest-support workflow you choose.</div>
+    <div class="modal-head">
+      <div><div class="micro"><span class="red-dot"></span>Sfera stay request</div><h3>Request a stay.</h3></div>
+      <button class="close" onclick="closeModal('stayRequestModal')">×</button>
+    </div>
+    <form class="booking-form" id="stayRequestForm" onsubmit="submitStayRequest(event,this)">
+      <div class="field"><label>Name</label><input name="name" required autocomplete="name" placeholder="Guest name"></div>
+      <div class="field"><label>WhatsApp / phone</label><input name="phone" required autocomplete="tel" placeholder="+383 ..."></div>
+      <div class="field full"><label>Email</label><input name="email" required type="email" autocomplete="email" placeholder="guest@email.com"></div>
+      <div class="field"><label>Room</label><select name="room" id="requestRoom"></select></div>
+      <div class="field"><label>Guests</label><select name="guests" id="requestGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
+      <div class="field"><label>Check-in</label><input name="checkIn" id="requestIn" type="date" required></div>
+      <div class="field"><label>Check-out</label><input name="checkOut" id="requestOut" type="date" required></div>
+      <div class="field full"><label>Message</label><textarea name="message" placeholder="Optional"></textarea></div>
+      <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+      <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
+      <div class="form-success" id="stayRequestSuccess">Request sent. The Sfera team will review your dates and contact you.</div>
+      <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
     </form>
   </div>
 </div>
@@ -1295,8 +1298,8 @@ function priRoomCard(r){
       </div>
       <p class="pri-room-note">Free Wi‑Fi · Professionally operated by Sfera</p>
       <div class="pri-room-actions">
-        <button class="btn btn-black" onclick="openPriRoom('${r.room}')">View room</button>
-        <a class="btn" href="${r.airbnb}" target="_blank" rel="noopener">Airbnb</a>
+        <button class="btn" onclick="openPriRoom('${r.room}')">View room</button>
+        <button class="btn btn-black" onclick="openStayRequestForRoom('${r.room}')">Request with Sfera</button>
       </div>
     </div>
   </article>`;
@@ -1315,18 +1318,18 @@ function renderPriRooms(floor='all',query=''){
   });
 }
 function openPriRoom(roomNo){
+  currentPriRoom=roomNo;
   const r=priRooms.find(x=>x.room===roomNo); if(!r)return;
   document.getElementById('priRoomTitle').textContent='Room '+r.room;
-  document.getElementById('priRoomAirbnb').href=r.airbnb;
-  const photos=(r.photos&&r.photos.length)?r.photos:[r.fallback];
+    const photos=(r.photos&&r.photos.length)?r.photos:[r.fallback];
   const p=[...photos]; while(p.length<3)p.push(p[p.length-1]);
   document.getElementById('priRoomGallery').innerHTML=`<div class="pri-room-gallery"><div class="g" style="background-image:url('${p[0]}')"></div><div class="g" style="background-image:url('${p[1]}')"></div><div class="g" style="background-image:url('${p[2]}')"></div></div>`;
   const d=r.verified;
   document.getElementById('priRoomDetails').innerHTML=`
-    <div class="pri-detail"><b>Guests</b><span>${d?d.guests:'See Airbnb listing'}</span></div>
-    <div class="pri-detail"><b>Bed</b><span>${d?d.bed:'See Airbnb listing'}</span></div>
-    <div class="pri-detail"><b>Bathroom</b><span>${d?d.bath:'See Airbnb listing'}</span></div>`;
-  document.getElementById('priRoomAmenities').innerHTML=d?`<strong style="font-weight:500">Main amenities</strong><br>${d.amenities}`:'Room-specific capacity and bed details are available on the linked Airbnb listing.';
+    <div class="pri-detail"><b>Guests</b><span>${d?d.guests:'Details pending'}</span></div>
+    <div class="pri-detail"><b>Bed</b><span>${d?d.bed:'Details pending'}</span></div>
+    <div class="pri-detail"><b>Bathroom</b><span>${d?d.bath:'Details pending'}</span></div>`;
+  document.getElementById('priRoomAmenities').innerHTML=d?`<strong style="font-weight:500">Main amenities</strong><br>${d.amenities}`:'Additional room-specific details will be confirmed by the Sfera team.';
   document.getElementById('priRoomSourceNote').textContent=(r.photos&&r.photos.length)?'Room photography':'PRI Aparthotel property photography shown temporarily. The exact room gallery will be added shortly.';
   openModal('priRoomModal');
 }
@@ -1374,19 +1377,17 @@ function findStay(e,form){
   }
 }
 function portfolioComingSoon(name){alert(name+' will use the same property-page system after its content and photos are added.');}
-function checkPriLiveAvailability(){
-  const roomNo=document.getElementById('priAvailRoom').value;
-  const r=priRooms.find(x=>x.room===roomNo); if(!r)return;
-  const cin=document.getElementById('priCheckIn').value;
-  const cout=document.getElementById('priCheckOut').value;
-  const guests=document.getElementById('priGuests').value;
-  let url=r.airbnb;
-  const q=[];
-  if(cin)q.push('check_in='+encodeURIComponent(cin));
-  if(cout)q.push('check_out='+encodeURIComponent(cout));
-  if(guests)q.push('guests='+encodeURIComponent(guests));
-  if(q.length)url+='?'+q.join('&');
-  window.open(url,'_blank','noopener');
+let currentPriRoom = null;
+
+function openStayRequestForRoom(roomNo){
+  currentPriRoom = roomNo;
+  const roomSel=document.getElementById('priAvailRoom');
+  if(roomSel) roomSel.value=roomNo;
+  openStayRequest();
+}
+function requestCurrentRoom(){
+  if(currentPriRoom) openStayRequestForRoom(currentPriRoom);
+  else openStayRequest();
 }
 function openStayRequest(){
   const room=document.getElementById('priAvailRoom')?.value||priRooms[0].room;
@@ -1401,26 +1402,52 @@ function openStayRequest(){
   document.getElementById('requestGuests').value=guests;
   openModal('stayRequestModal');
 }
-function submitStayRequest(e,form){
+async function submitStayRequest(e,form){
   e.preventDefault();
-  const s=form.querySelector('.form-success'); if(s)s.style.display='block';
+  const submit=document.getElementById('stayRequestSubmit');
+  const success=document.getElementById('stayRequestSuccess');
+  const error=document.getElementById('stayRequestError');
+  success.style.display='none';
+  error.style.display='none';
+
+  const data=Object.fromEntries(new FormData(form).entries());
+
+  if(!data.checkIn || !data.checkOut || data.checkOut<=data.checkIn){
+    error.textContent='Please choose valid check-in and check-out dates.';
+    error.style.display='block';
+    return;
+  }
+
+  submit.disabled=true;
+  submit.textContent='Sending…';
+
+  try{
+    const response=await fetch('/api/request-stay',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+    const result=await response.json().catch(()=>({}));
+
+    if(!response.ok || !result.ok){
+      throw new Error(result.error || 'Request failed');
+    }
+
+    success.style.display='block';
+    form.reset();
+    document.getElementById('requestGuests').value='2';
+    setTimeout(()=>closeModal('stayRequestModal'),2200);
+  }catch(err){
+    console.error(err);
+    error.textContent='We couldn’t send your request. Please try again or contact Sfera directly.';
+    error.style.display='block';
+  }finally{
+    submit.disabled=false;
+    submit.textContent='Send request to Sfera';
+  }
 }
 
 
-function checkPriBooking(){
-  const cin=document.getElementById('priCheckIn')?.value||'';
-  const cout=document.getElementById('priCheckOut')?.value||'';
-  const guests=document.getElementById('priGuests')?.value||'2';
-  let url='https://www.booking.com/hotel/xk/pri-aparthotel.html';
-  const q=[];
-  if(cin)q.push('checkin='+encodeURIComponent(cin));
-  if(cout)q.push('checkout='+encodeURIComponent(cout));
-  q.push('group_adults='+encodeURIComponent(guests));
-  q.push('group_children=0');
-  q.push('no_rooms=1');
-  if(q.length)url+='?'+q.join('&');
-  window.open(url,'_blank','noopener');
-}
 
 </script>
 </body>
