@@ -1216,6 +1216,9 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
       <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
       <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
+      <div id="stayRequestFallback" class="field full" style="display:none;margin-top:2px">
+        <a class="btn btn-black" id="stayRequestFallbackWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
+      </div>
     </form>
     <div class="stay-request-confirmation" id="stayRequestSuccess" aria-live="polite">
       <div class="stay-confirm-top">
@@ -1434,9 +1437,11 @@ function openStayRequest(){
   const roomSel=document.getElementById('requestRoom');
   const form=document.getElementById('stayRequestForm');
   const success=document.getElementById('stayRequestSuccess');
+  const fallback=document.getElementById('stayRequestFallback');
   const title=document.getElementById('stayRequestModalTitle');
   if(form) form.style.display='grid';
   if(success) success.style.display='none';
+  if(fallback) fallback.style.display='none';
   if(title) title.textContent='Request a stay.';
   roomSel.innerHTML=priRooms.map(r=>`<option value="${r.room}">Room ${r.room}</option>`).join('');
   roomSel.value=room;
@@ -1454,6 +1459,25 @@ async function submitStayRequest(e,form){
   error.style.display='none';
 
   const data=Object.fromEntries(new FormData(form).entries());
+  const whatsappLines=[
+    'Hi Sfera, I just submitted a stay request through the website.',
+    '',
+    'Property: PRI Aparthotel',
+    `Room: ${data.room}`,
+    `Guests: ${data.guests}`,
+    `Check-in: ${data.checkIn}`,
+    `Check-out: ${data.checkOut}`,
+    `Name: ${data.name}`,
+    `Email: ${data.email}`
+  ];
+  if(data.message && data.message.trim()){
+    whatsappLines.push(`Message: ${data.message.trim()}`);
+  }
+  const whatsappUrl=`https://wa.me/38348101070?text=${encodeURIComponent(whatsappLines.join('\n'))}`;
+  ['stayRequestWhatsApp','stayRequestFallbackWhatsApp'].forEach(id=>{
+    const button=document.getElementById(id);
+    if(button) button.href=whatsappUrl;
+  });
 
   if(!data.checkIn || !data.checkOut || data.checkOut<=data.checkIn){
     error.textContent='Please choose valid check-in and check-out dates.';
@@ -1476,24 +1500,6 @@ async function submitStayRequest(e,form){
       throw new Error(result.error || 'Request failed');
     }
 
-    const whatsappLines=[
-      'Hi Sfera, I just submitted a stay request through the website.',
-      '',
-      'Property: PRI Aparthotel',
-      `Room: ${data.room}`,
-      `Guests: ${data.guests}`,
-      `Check-in: ${data.checkIn}`,
-      `Check-out: ${data.checkOut}`,
-      `Name: ${data.name}`,
-      `Email: ${data.email}`
-    ];
-    if(data.message && data.message.trim()){
-      whatsappLines.push(`Message: ${data.message.trim()}`);
-    }
-    const whatsappUrl=`https://wa.me/38348101070?text=${encodeURIComponent(whatsappLines.join('\n'))}`;
-    const whatsappButton=document.getElementById('stayRequestWhatsApp');
-    if(whatsappButton) whatsappButton.href=whatsappUrl;
-
     const formatStayDate=(value)=>{
       if(!value) return '—';
       const d=new Date(`${value}T12:00:00`);
@@ -1513,8 +1519,10 @@ async function submitStayRequest(e,form){
     document.getElementById('requestGuests').value='2';
   }catch(err){
     console.error(err);
-    error.textContent='We couldn’t send your request. Please try again or contact Sfera directly.';
+    error.textContent='We couldn’t send the request automatically. Continue on WhatsApp to send it directly to Sfera.';
     error.style.display='block';
+    const fallback=document.getElementById('stayRequestFallback');
+    if(fallback) fallback.style.display='block';
   }finally{
     submit.disabled=false;
     submit.textContent='Send request to Sfera';
