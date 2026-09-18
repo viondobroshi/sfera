@@ -167,6 +167,21 @@ textarea{min-height:100px;resize:vertical}
 .partner-form{border:1px solid var(--black);padding:28px;background:var(--paper)}
 .partner-form .booking-form{grid-template-columns:1fr 1fr}
 .form-success{display:none;margin-top:12px;padding:12px;border:1px solid var(--black);font-size:12px}
+.stay-request-confirmation{display:none;border-top:1px solid var(--black);padding-top:28px}
+.stay-confirm-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.stay-confirm-icon{width:42px;height:42px;border:1px solid var(--black);display:grid;place-items:center;font-size:22px;line-height:1;flex:0 0 auto}
+.stay-request-confirmation h4{font-size:clamp(30px,4vw,44px);font-weight:400;line-height:1;letter-spacing:-.04em;margin:0 0 14px}
+.stay-confirm-lead{font-size:14px;line-height:1.6;color:#555b5f;margin:0 0 24px;max-width:560px}
+.stay-confirm-summary{border:1px solid var(--black);margin:0 0 22px}
+.stay-confirm-row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px}
+.stay-confirm-row:last-child{border-bottom:0}
+.stay-confirm-row span:first-child{font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#6b7074}
+.stay-confirm-next{background:var(--sfera-grey);padding:18px;border:1px solid var(--black);margin-bottom:16px}
+.stay-confirm-next b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.stay-confirm-next p{margin:0;font-size:13px;line-height:1.55}
+.stay-confirm-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.stay-confirm-note{font-size:11px;line-height:1.5;color:#666c70;margin:14px 0 0}
+@media(max-width:560px){.stay-confirm-row{grid-template-columns:1fr;gap:5px}.stay-confirm-actions .btn{width:100%;text-align:center}}
 
 .quote-strip{background:var(--sfera-grey);border-top:1px solid black;border-bottom:1px solid black;padding:50px 0}
 .quote-strip .wrap{display:flex;justify-content:space-between;gap:50px;align-items:center}
@@ -1186,7 +1201,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 <div class="modal" id="stayRequestModal" onclick="outsideClose(event,'stayRequestModal')">
   <div class="modal-card">
     <div class="modal-head">
-      <div><div class="micro"><span class="red-dot"></span>Sfera stay request</div><h3>Request a stay.</h3></div>
+      <div><div class="micro"><span class="red-dot"></span>Sfera stay request</div><h3 id="stayRequestModalTitle">Request a stay.</h3></div>
       <button class="close" onclick="closeModal('stayRequestModal')">×</button>
     </div>
     <form class="booking-form" id="stayRequestForm" onsubmit="submitStayRequest(event,this)">
@@ -1200,13 +1215,31 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field full"><label>Message</label><textarea name="message" placeholder="Optional"></textarea></div>
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
       <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
-      <div class="form-success" id="stayRequestSuccess">
-        <div>Request sent. The Sfera team will review your dates and contact you.</div>
-        <div style="margin-top:8px">For a faster conversation, continue on WhatsApp and send your request directly to Sfera.</div>
-        <a class="btn btn-black" id="stayRequestWhatsApp" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:12px">Continue on WhatsApp</a>
-      </div>
       <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
     </form>
+    <div class="stay-request-confirmation" id="stayRequestSuccess" aria-live="polite">
+      <div class="stay-confirm-top">
+        <div class="stay-confirm-icon" aria-hidden="true">✓</div>
+        <div class="micro"><span class="red-dot"></span>Request received</div>
+      </div>
+      <h4>Thank you, <span id="stayConfirmName">guest</span>.</h4>
+      <p class="stay-confirm-lead">Your stay request has been sent to Sfera. Our team will review availability and contact you shortly.</p>
+      <div class="stay-confirm-summary">
+        <div class="stay-confirm-row"><span>Property</span><strong>PRI Aparthotel</strong></div>
+        <div class="stay-confirm-row"><span>Room</span><strong id="stayConfirmRoom">—</strong></div>
+        <div class="stay-confirm-row"><span>Dates</span><strong id="stayConfirmDates">—</strong></div>
+        <div class="stay-confirm-row"><span>Guests</span><strong id="stayConfirmGuests">—</strong></div>
+      </div>
+      <div class="stay-confirm-next">
+        <b>What happens next?</b>
+        <p>A Sfera team member will review your dates and contact you to confirm availability and the reservation.</p>
+      </div>
+      <div class="stay-confirm-actions">
+        <a class="btn btn-black" id="stayRequestWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
+        <button class="btn" type="button" onclick="closeModal('stayRequestModal')">Close</button>
+      </div>
+      <p class="stay-confirm-note">This is a stay request and is not confirmed until you receive confirmation from Sfera.</p>
+    </div>
   </div>
 </div>
 
@@ -1399,6 +1432,12 @@ function openStayRequest(){
   const cout=document.getElementById('priCheckOut')?.value||'';
   const guests=document.getElementById('priGuests')?.value||'2';
   const roomSel=document.getElementById('requestRoom');
+  const form=document.getElementById('stayRequestForm');
+  const success=document.getElementById('stayRequestSuccess');
+  const title=document.getElementById('stayRequestModalTitle');
+  if(form) form.style.display='grid';
+  if(success) success.style.display='none';
+  if(title) title.textContent='Request a stay.';
   roomSel.innerHTML=priRooms.map(r=>`<option value="${r.room}">Room ${r.room}</option>`).join('');
   roomSel.value=room;
   document.getElementById('requestIn').value=cin;
@@ -1455,6 +1494,20 @@ async function submitStayRequest(e,form){
     const whatsappButton=document.getElementById('stayRequestWhatsApp');
     if(whatsappButton) whatsappButton.href=whatsappUrl;
 
+    const formatStayDate=(value)=>{
+      if(!value) return '—';
+      const d=new Date(`${value}T12:00:00`);
+      return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    };
+    const guestName=(data.name||'Guest').trim();
+    const guestLabel=data.guests==='1'?'1 guest':(data.guests==='4'?'4+ guests':`${data.guests} guests`);
+    document.getElementById('stayConfirmName').textContent=guestName;
+    document.getElementById('stayConfirmRoom').textContent=`Room ${data.room}`;
+    document.getElementById('stayConfirmDates').textContent=`${formatStayDate(data.checkIn)} → ${formatStayDate(data.checkOut)}`;
+    document.getElementById('stayConfirmGuests').textContent=guestLabel;
+    const title=document.getElementById('stayRequestModalTitle');
+    if(title) title.textContent='Request received.';
+    form.style.display='none';
     success.style.display='block';
     form.reset();
     document.getElementById('requestGuests').value='2';
