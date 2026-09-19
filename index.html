@@ -95,8 +95,8 @@ h1{font-size:clamp(58px,7vw,112px);line-height:.88;letter-spacing:-.055em;margin
 .proof-grid{display:grid;grid-template-columns:repeat(4,1fr)}
 .proof-item{padding:27px 28px;border-right:1px solid var(--line)}
 .proof-item:last-child{border-right:0}
-.proof-item strong{display:block;font-size:15px;font-weight:500;margin-bottom:4px}
-.proof-item span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+.proof-item strong{display:block;font-size:clamp(30px,3.6vw,50px);font-weight:400;letter-spacing:-.045em;line-height:1;margin-bottom:8px}
+.proof-item span{display:block;font-size:11px;line-height:1.45;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
 
 .section{padding:108px 0}
 .section-head{display:grid;grid-template-columns:.65fr 1.35fr;gap:55px;align-items:end;margin-bottom:52px}
@@ -772,7 +772,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     <div class="hero-copy">
       <div class="hero-kicker micro"><span class="red-dot"></span>Hospitality real estate operator</div>
       <h1>Real estate,<br>operated better.</h1>
-      <p>Sfera turns apartment buildings, aparthotels and selected premium villas into professionally operated hospitality assets — from concept and launch to revenue management and daily operations.</p>
+      <p>Sfera turns apartment buildings, aparthotels and selected premium villas into professionally operated hospitality assets — currently across Prishtina, Prizren and Prevallë.</p>
       <div class="hero-actions">
         <button class="btn btn-black" onclick="document.querySelector('#partner').scrollIntoView()">Partner with Sfera</button>
         <button class="btn" onclick="openModal('bookingModal')">Find a stay</button>
@@ -805,10 +805,10 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
 <div class="proof">
   <div class="wrap proof-grid">
-    <div class="proof-item"><strong>Hospitality operations</strong><span>One accountable operator</span></div>
-    <div class="proof-item"><strong>Urban + leisure</strong><span>Buildings, aparthotels, villas</span></div>
-    <div class="proof-item"><strong>Flexible partnerships</strong><span>Structures tailored to the asset</span></div>
-    <div class="proof-item"><strong>Regional ambition</strong><span>Built beyond a single market</span></div>
+    <div class="proof-item"><strong>67</strong><span>Rooms & apartments operated</span></div>
+    <div class="proof-item"><strong>1</strong><span>Premium leisure villa</span></div>
+    <div class="proof-item"><strong>4</strong><span>Independent operating brands</span></div>
+    <div class="proof-item"><strong>3</strong><span>Destinations across Kosovo</span></div>
   </div>
 </div>
 
@@ -925,20 +925,20 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
     <div class="portfolio-grid">
       <article class="property pri-entry">
-        <div class="property-top"><div><div class="micro">Prishtina</div><h3>PRI Aparthotel</h3><p>Urban hospitality · Aparthotel</p></div><div class="trust">Operated by Sfera</div></div>
+        <div class="property-top"><div><div class="micro">Prishtina</div><h3>PRI Aparthotel</h3><p>19-room aparthotel · Urban hospitality</p></div><div class="trust">Operated by Sfera</div></div>
         <div class="property-art"><i></i><i></i><i></i></div>
         <div class="pri-card-actions"><button class="btn btn-black" onclick="openPriProperty()">View property</button><button class="btn" onclick="openPriProperty('availability')">Check availability</button></div>
       </article>
       <article class="property">
-        <div class="property-top"><div><div class="micro">Prishtina</div><h3>Prishtina City Apartments</h3><p>Urban hospitality · City stays</p></div><div class="trust">Operated by Sfera</div></div>
+        <div class="property-top"><div><div class="micro">Prishtina</div><h3>Prishtina City Apartments</h3><p>33 rooms & apartments · Center and Lakrishte</p></div><div class="trust">Operated by Sfera</div></div>
         <div class="property-art"><i></i><i></i><i></i></div>
       </article>
       <article class="property">
-        <div class="property-top"><div><div class="micro">Prizren</div><h3>Agara Stays</h3><p>Urban hospitality · Rooms & stays</p></div><div class="trust">Operated by Sfera</div></div>
+        <div class="property-top"><div><div class="micro">Prizren</div><h3>Agara Stays</h3><p>15-room stay · Historic city center</p></div><div class="trust">Operated by Sfera</div></div>
         <div class="property-art"><i></i><i></i><i></i></div>
       </article>
       <article class="property">
-        <div class="property-top"><div><div class="micro">Prevallë</div><h3>Villa Hilltop</h3><p>Selected leisure · Premium villa</p></div><div class="trust">Operated by Sfera</div></div>
+        <div class="property-top"><div><div class="micro">Prevallë</div><h3>Villa Hilltop</h3><p>Private wellness villa · Up to 8 guests</p></div><div class="trust">Operated by Sfera</div></div>
         <div class="property-art"><i></i><i></i><i></i></div>
       </article>
     </div>
@@ -992,12 +992,12 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     <div>
       <div class="micro"><span class="red-dot"></span>Partner with Sfera</div>
       <h2>A reliable operating partner for hospitality real estate.</h2>
-      <p>Sfera selectively evaluates properties and development opportunities. The commercial potential is assessed by the operator rather than asking the owner to guess the ADR.</p>
+      <p>Sfera selectively evaluates properties and development opportunities. We assess the asset’s hospitality potential, operating requirements and commercial fit before discussing the right partnership structure privately.</p>
       <div class="partner-points">
-        <div class="partner-point"><span>01</span><span>Owners, developers, investors and property holders.</span></div>
-        <div class="partner-point"><span>02</span><span>Planning, construction, completed or already operating assets.</span></div>
-        <div class="partner-point"><span>03</span><span>Flexible partnership structures tailored to the asset and the owner’s objectives.</span></div>
-        <div class="partner-point"><span>04</span><span>Selected opportunities only — quality and economics first.</span></div>
+        <div class="partner-point"><span>01</span><span>Apartment buildings, aparthotels, hotel conversions and selected premium villas.</span></div>
+        <div class="partner-point"><span>02</span><span>Projects in planning or construction, completed assets and existing operations.</span></div>
+        <div class="partner-point"><span>03</span><span>Sfera reviews location, demand, design, operating efficiency and commercial viability.</span></div>
+        <div class="partner-point"><span>04</span><span>If the opportunity fits, we discuss the operating structure and next steps privately.</span></div>
       </div>
     </div>
 
@@ -1015,9 +1015,9 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <div class="field full"><label>Property link / plans</label><input name="link" type="url" placeholder="Optional: listing, Drive link, plans or brochure"></div>
         <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the property or project."></textarea></div>
         <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
-        <div class="field full form-helper">Start with the basics. Location, unit count, current status and any photos or floor plans are enough for an initial review.</div>
+        <div class="field full form-helper">Start with the basics. Location, unit count, current status and any photos or floor plans are enough for an initial review. No financial documents are required at this stage.</div>
         <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to review and respond to this opportunity, as described in the <a href="#privacy">privacy notice</a>.</span></label>
-        <button class="btn btn-black field full" type="submit">Submit property</button>
+        <button class="btn btn-black field full" type="submit">Request an operator review</button>
       </div>
       <div class="form-success">Thank you. Your property has been submitted to Sfera for review.</div>
       <div class="form-success form-error">We couldn’t submit the property. Please try again.</div>
@@ -1315,7 +1315,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
 <div class="modal" id="partnerModal" onclick="outsideClose(event,'partnerModal')">
   <div class="modal-card">
-    <div class="modal-head"><div><div class="micro"><span class="red-dot"></span>Property acquisition</div><h3>Submit your property.</h3></div><button class="close" onclick="closeModal('partnerModal')">×</button></div>
+    <div class="modal-head"><div><div class="micro"><span class="red-dot"></span>Property opportunity</div><h3>Request an operator review.</h3></div><button class="close" onclick="closeModal('partnerModal')">×</button></div>
     <form class="booking-form" onsubmit="submitPropertyLead(event,this)">
       <div class="field"><label>Name / company</label><input name="name" required placeholder="Your name"></div>
       <div class="field"><label>Email</label><input name="email" type="email" required placeholder="you@example.com"></div>
@@ -1327,8 +1327,9 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field full"><label>Property link / plans</label><input name="link" type="url" placeholder="Optional: listing, Drive link, plans or brochure"></div>
       <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the asset or project."></textarea></div>
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+      <div class="field full form-helper">Location, unit count, current status and any available property link are enough for an initial review. No financial documents are required at this stage.</div>
       <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to review and respond to this opportunity, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
-      <button class="btn btn-black field full" type="submit">Submit property</button>
+      <button class="btn btn-black field full" type="submit">Request an operator review</button>
       <div class="form-success field full">Thank you. Your property has been submitted to Sfera for review.</div>
       <div class="form-success form-error field full">We couldn’t submit the property. Please try again.</div>
     </form>
