@@ -34,8 +34,26 @@ export default async function handler(req, res) {
       return res.status(500).json({ ok: false, error: 'Make webhook is not configured' });
     }
 
+    const submittedAt = new Date().toISOString();
+    const details = `NEW WEBSITE STAY REQUEST
+
+Property: PRI Aparthotel
+Room: ${String(room).trim()}
+Name: ${String(name).trim()}
+Email: ${String(email).trim()}
+Phone: ${String(phone).trim()}
+Guests: ${String(guests).trim() || 'Not provided'}
+Check-in: ${String(checkIn).trim()}
+Check-out: ${String(checkOut).trim()}
+
+Message:
+${String(message || '').trim() || 'No message provided'}
+
+Submitted: ${submittedAt}`;
+
     const payload = {
       source: 'Sfera website',
+      leadType: 'Stay request',
       property: 'PRI Aparthotel',
       name: String(name).trim(),
       phone: String(phone).trim(),
@@ -45,8 +63,9 @@ export default async function handler(req, res) {
       checkIn: String(checkIn).trim(),
       checkOut: String(checkOut).trim(),
       message: String(message || '').trim(),
-      emailDestination: 'prishtinacityapartments@gmail.com',
-      submittedAt: new Date().toISOString()
+      commentText: details,
+      emailBody: details,
+      submittedAt
     };
 
     const r = await fetch(webhookUrl, {
