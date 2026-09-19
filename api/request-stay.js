@@ -15,7 +15,9 @@ export default async function handler(req, res) {
       checkIn = '',
       checkOut = '',
       message = '',
-      website = ''
+      website = '',
+      privacyConsent = '',
+      acknowledgementVersion = ''
     } = body;
 
     // Honeypot field: silently accept likely bot submissions.
@@ -25,7 +27,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
-    if (String(checkOut) <= String(checkIn)) {
+    const guestEmail = String(email).trim();
+    const guestPhone = String(phone).replace(/[\s().-]/g, '');
+    if (!/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(guestEmail) ||
+        !/^\+[1-9]\d{7,14}$/.test(guestPhone) ||
+        !['on', true].includes(privacyConsent)) {
+      return res.status(400).json({ ok: false, error: 'Please provide a valid email, an international phone number and consent' });
+    }
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(checkIn)) ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(String(checkOut)) ||
+        String(checkOut) <= String(checkIn)) {
       return res.status(400).json({ ok: false, error: 'Invalid dates' });
     }
 
@@ -35,6 +47,24 @@ export default async function handler(req, res) {
     }
 
     const submittedAt = new Date().toISOString();
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+    const acknowledgementEnabled = acknowledgementVersion === 'stay-v1';
+    const acknowledgementEmail = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#171717;line-height:1.6"><h2>Sfera — request received</h2><p>Hi ${escapeHtml(String(name).trim())},</p><p>Thank you for your stay request. We have received the following details:</p><p><strong>Property:</strong> PRI Aparthotel<br><strong>Room:</strong> ${escapeHtml(room)}<br><strong>Check-in:</strong> ${escapeHtml(checkIn)}<br><strong>Check-out:</strong> ${escapeHtml(checkOut)}<br><strong>Guests:</strong> ${escapeHtml(guests || 'Not provided')}</p><p><strong>Your booking is not confirmed yet.</strong> Our team will check availability and contact you to confirm the details.</p><p>You can reply to this email or <a href="https://wa.me/38348101070">chat with Sfera on WhatsApp</a> if you need to update your request.</p><p>Thank you,<br>The Sfera team</p></div>`;
+    const acknowledgementWhatsAppBody = JSON.stringify({
+      channelId: 534453,
+      message: {
+        type: 'whatsapp_template',
+        template: {
+          name: 'follow_up', languageCode: 'en',
+          components: [{ type: 'body', parameters: [
+            { type: 'text', text: String(name).trim().replace(/\s+/g, ' ').slice(0, 100) },
+            { type: 'text', text: `we have received your Sfera stay request for PRI Aparthotel, ${String(checkIn).trim()} to ${String(checkOut).trim()}. Your booking is not confirmed yet. Our team will check availability and contact you to confirm the details. You can reply here with any questions.` }
+          ] }]
+        }
+      }
+    });
     const details = `NEW WEBSITE STAY REQUEST
 
 Property: PRI Aparthotel
@@ -56,8 +86,8 @@ Submitted: ${submittedAt}`;
       leadType: 'Stay request',
       property: 'PRI Aparthotel',
       name: String(name).trim(),
-      phone: String(phone).trim(),
-      email: String(email).trim(),
+      phone: guestPhone,
+      email: guestEmail,
       room: String(room).trim(),
       guests: String(guests).trim(),
       checkIn: String(checkIn).trim(),
@@ -65,7 +95,10 @@ Submitted: ${submittedAt}`;
       message: String(message || '').trim(),
       commentText: details,
       emailBody: details,
-      submittedAt
+      submittedAt,
+      acknowledgementVersion: acknowledgementEnabled ? 'stay-v1' : '',
+      acknowledgementEmail,
+      acknowledgementWhatsAppBody
     };
 
     const r = await fetch(webhookUrl, {
