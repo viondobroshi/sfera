@@ -964,22 +964,25 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       </div>
     </div>
 
-    <form class="partner-form" onsubmit="submitPreview(event,this)">
+    <form class="partner-form" onsubmit="submitPropertyLead(event,this)">
       <div class="micro">Submit property for review</div>
       <div style="height:20px"></div>
       <div class="booking-form">
-        <div class="field"><label>Name / company</label><input required placeholder="Your name"></div>
-        <div class="field"><label>Email / phone</label><input required placeholder="Contact details"></div>
-        <div class="field"><label>Property location</label><input required placeholder="City / country"></div>
-        <div class="field"><label>Property type</label><select><option>Apartment building</option><option>Aparthotel</option><option>Hotel / conversion</option><option>Residential development</option><option>Villa</option><option>Other</option></select></div>
-        <div class="field"><label>Number of units</label><input placeholder="Approximate"></div>
-        <div class="field"><label>Status</label><select><option>Planning</option><option>Construction</option><option>Completed</option><option>Operating</option></select></div>
-        <div class="field full"><label>Property link / plans</label><input placeholder="Optional: listing, Drive link, plans or brochure"></div>
-        <div class="field full"><label>Opportunity</label><textarea placeholder="Tell us about the property or project."></textarea></div>
+        <div class="field"><label>Name / company</label><input name="name" required placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input name="email" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label>Phone</label><input name="phone" type="tel" placeholder="Optional"></div>
+        <div class="field"><label>Property location</label><input name="location" required placeholder="City / country"></div>
+        <div class="field"><label>Property type</label><select name="propertyType" required><option>Apartment building</option><option>Aparthotel</option><option>Hotel / conversion</option><option>Residential development</option><option>Villa</option><option>Other</option></select></div>
+        <div class="field"><label>Number of units</label><input name="units" placeholder="Approximate"></div>
+        <div class="field"><label>Status</label><select name="status"><option>Planning</option><option>Construction</option><option>Completed</option><option>Operating</option></select></div>
+        <div class="field full"><label>Property link / plans</label><input name="link" type="url" placeholder="Optional: listing, Drive link, plans or brochure"></div>
+        <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the property or project."></textarea></div>
+        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
         <div class="field full form-helper">Start with the basics. Location, unit count, current status and any photos or floor plans are enough for an initial review.</div>
         <button class="btn btn-black field full" type="submit">Submit property</button>
       </div>
-      <div class="form-success">Preview submitted. In the live site this would route to the Sfera property-acquisition team.</div>
+      <div class="form-success">Thank you. Your property has been submitted to Sfera for review.</div>
+      <div class="form-success form-error">We couldn’t submit the property. Please try again.</div>
     </form>
   </div>
 </section>
@@ -1262,13 +1265,20 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 <div class="modal" id="partnerModal" onclick="outsideClose(event,'partnerModal')">
   <div class="modal-card">
     <div class="modal-head"><div><div class="micro"><span class="red-dot"></span>Property acquisition</div><h3>Submit your property.</h3></div><button class="close" onclick="closeModal('partnerModal')">×</button></div>
-    <form class="booking-form" onsubmit="submitPreview(event,this)">
-      <div class="field"><label>Name / company</label><input required placeholder="Your name"></div>
-      <div class="field"><label>Contact</label><input required placeholder="Email / phone"></div>
-      <div class="field"><label>Location</label><input required placeholder="City / country"></div>
-      <div class="field"><label>Property type</label><select><option>Apartment building</option><option>Aparthotel</option><option>Hotel / conversion</option><option>Development</option><option>Villa</option></select></div>
-      <div class="field full"><label>Opportunity</label><textarea placeholder="Tell us about the asset or project."></textarea></div>
+    <form class="booking-form" onsubmit="submitPropertyLead(event,this)">
+      <div class="field"><label>Name / company</label><input name="name" required placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input name="email" type="email" required placeholder="you@example.com"></div>
+      <div class="field"><label>Phone</label><input name="phone" type="tel" placeholder="Optional"></div>
+      <div class="field"><label>Location</label><input name="location" required placeholder="City / country"></div>
+      <div class="field"><label>Property type</label><select name="propertyType" required><option>Apartment building</option><option>Aparthotel</option><option>Hotel / conversion</option><option>Development</option><option>Villa</option><option>Other</option></select></div>
+      <div class="field"><label>Number of units</label><input name="units" placeholder="Approximate"></div>
+      <div class="field"><label>Status</label><select name="status"><option>Planning</option><option>Construction</option><option>Completed</option><option>Operating</option></select></div>
+      <div class="field full"><label>Property link / plans</label><input name="link" type="url" placeholder="Optional: listing, Drive link, plans or brochure"></div>
+      <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the asset or project."></textarea></div>
+      <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
       <button class="btn btn-black field full" type="submit">Submit property</button>
+      <div class="form-success field full">Thank you. Your property has been submitted to Sfera for review.</div>
+      <div class="form-success form-error field full">We couldn’t submit the property. Please try again.</div>
     </form>
   </div>
 </div>
@@ -1296,7 +1306,29 @@ document.addEventListener('click',e=>{
   if(panel?.classList.contains('open') && !panel.contains(e.target) && !button?.contains(e.target)) toggleMenu(false);
 });
 function demoBooking(e){e.preventDefault();closeModal('bookingModal');openPriProperty();}
-function submitPreview(e,form){e.preventDefault();const s=form.querySelector('.form-success');if(s)s.style.display='block';else alert('Preview submitted — the live website would route this lead to Sfera.');}
+async function submitPropertyLead(e,form){
+  e.preventDefault();
+  const success=form.querySelector('.form-success:not(.form-error)');
+  const error=form.querySelector('.form-error');
+  const button=form.querySelector('button[type="submit"]');
+  if(success)success.style.display='none';
+  if(error)error.style.display='none';
+  const previousLabel=button?.textContent;
+  if(button){button.disabled=true;button.textContent='Submitting…';}
+  try{
+    const payload=Object.fromEntries(new FormData(form).entries());
+    const response=await fetch('/api/submit-property',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok||!result.ok)throw new Error(result.error||'Submission failed');
+    form.reset();
+    if(success)success.style.display='block';
+  }catch(err){
+    console.error('Property submission failed',err);
+    if(error)error.style.display='block';
+  }finally{
+    if(button){button.disabled=false;button.textContent=previousLabel;}
+  }
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))})
 
 const priRooms = [{"room": "101", "floor": "1", "airbnb": "https://www.airbnb.com/rooms/1703510387631530141", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/6252d74f-81ac-49f2-86b0-78be79be1dbc.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/621539a5-52f3-440e-a79e-5dfb57a60cd2.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/ad69c2a8-c956-42c0-bbbd-660d4c3b39f3.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/e6598b76-3cd4-4241-8a37-1d0248e1c86c.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/2694da3f-de2e-4cda-9f56-7ba68321be25.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": {"guests": "2 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Free parking · TV · Air conditioning"}}, {"room": "102", "floor": "1", "airbnb": "https://www.airbnb.com/rooms/1703527488047820389", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703527488047820389/original/6b76c648-db1d-41a2-acd1-c62cc3852b2a.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703527488047820389/original/b21f64bf-fe95-4dba-894e-2801368ef9b4.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703527488047820389/original/3891db32-9df7-438e-bb53-e87de40b18de.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": {"guests": "3 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Workspace · Free parking · TV · Air conditioning"}}, {"room": "201", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703530686845017905", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=", "verified": null}, {"room": "202", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703534195574259026", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703534195574259026/original/f73f3230-baf7-43c6-a968-c530addb4fe5.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703534195574259026/original/60cc0077-7a73-46f1-8ac5-934f52d1f876.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": {"guests": "2 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Free parking · TV · Air conditioning"}}, {"room": "203", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703537823827058173", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}, {"room": "204", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703539685427840408", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=", "verified": null}, {"room": "205", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703546218211356229", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703546218211356229/original/fe147e33-8e05-4a89-9b3d-9ba290743b5d.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703546218211356229/original/901be939-9415-4a15-8f4b-efc4986aee16.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": {"guests": "3 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Workspace · Free parking · TV · Air conditioning"}}, {"room": "206", "floor": "2", "airbnb": "https://www.airbnb.com/rooms/1703542405186475138", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}, {"room": "301", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703552885635248194", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": null}, {"room": "302", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703555684035176860", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}, {"room": "303", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703557284295413800", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=", "verified": null}, {"room": "304", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703558802611333747", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703558802611333747/original/857e86f6-8891-4ab9-a55a-9f0f8b80fd60.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703558802611333747/original/41002fb2-85cc-4149-aac7-6ee1020bb5c3.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": {"guests": "2 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Free parking · TV · Air conditioning"}}, {"room": "305", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703561602286759616", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}, {"room": "306", "floor": "3", "airbnb": "https://www.airbnb.com/rooms/1703564598108855139", "photos": ["https://a0.muscache.com/im/pictures/hosting/Hosting-1703564598108855139/original/26f7b74f-3e6b-453c-b9a1-b5512618e354.jpeg?im_w=1200", "https://a0.muscache.com/im/pictures/hosting/Hosting-1703564598108855139/original/035e5cef-b0b4-4a40-a14d-0e71ec186785.jpeg?im_w=1200"], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=", "verified": {"guests": "3 guests", "bed": "1 bed", "bath": "1 bathroom", "amenities": "Wi‑Fi · Workspace · Free parking · TV · Air conditioning"}}, {"room": "401", "floor": "4", "airbnb": "https://www.airbnb.com/rooms/1743495103581317878", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": null}, {"room": "402", "floor": "4", "airbnb": "https://www.airbnb.com/rooms/1743502131210294132", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}, {"room": "403", "floor": "4", "airbnb": "https://www.airbnb.com/rooms/1743504671501332710", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=", "verified": null}, {"room": "404", "floor": "4", "airbnb": "https://www.airbnb.com/rooms/1743506825638497243", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/829942847.jpg?k=a25df4ca7b4bda84de90ab3bd757004f7ee0a0deafa76fc98546a2348a67dea4&o=", "verified": null}, {"room": "405", "floor": "4", "airbnb": "https://www.airbnb.com/rooms/1743509213916470665", "photos": [], "fallback": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/811031688.jpg?k=c932c7c93773d10c93bcbd615ddc99fbd7ff9054086da4c98a1d6527bb956c99&o=", "verified": null}];
