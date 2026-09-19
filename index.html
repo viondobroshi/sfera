@@ -1282,7 +1282,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     </div>
     <form class="booking-form" id="stayRequestForm" onsubmit="submitStayRequest(event,this)">
       <div class="field"><label>Name</label><input name="name" required autocomplete="name" placeholder="Guest name"></div>
-      <div class="field"><label>WhatsApp / phone</label><input name="phone" required autocomplete="tel" placeholder="+383 ..."></div>
+      <div class="field"><label>WhatsApp / phone</label><input name="phone" required type="tel" autocomplete="tel" placeholder="+383 ..." pattern="\+[0-9 \(\)\.\-]{8,20}" title="Include your country code, for example +383 48 123 456"></div>
       <div class="field full"><label>Email</label><input name="email" required type="email" autocomplete="email" placeholder="guest@email.com"></div>
       <div class="field"><label>Room</label><select name="room" id="requestRoom"></select></div>
       <div class="field"><label>Guests</label><select name="guests" id="requestGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
@@ -1290,7 +1290,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field"><label>Check-out</label><input name="checkOut" id="requestOut" type="date" required></div>
       <div class="field full"><label>Message</label><textarea name="message" placeholder="Optional"></textarea></div>
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-      <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to respond to this stay request, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
+      <input type="hidden" name="acknowledgementVersion" value="stay-v1">
+      <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to receive a request acknowledgement and updates about this stay request from Sfera by WhatsApp and email, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
       <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
       <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
       <div id="stayRequestFallback" class="field full" style="display:none;margin-top:2px">
