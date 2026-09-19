@@ -196,6 +196,12 @@ textarea{min-height:100px;resize:vertical}
 .privacy-copy{max-width:760px}
 .privacy-copy p{font-size:13px;line-height:1.7;color:#555b60;margin:0 0 12px}
 .privacy-copy a{text-decoration:underline;text-underline-offset:3px;color:var(--black)}
+.cookie-banner{position:fixed;left:24px;right:24px;bottom:24px;z-index:200;display:none;grid-template-columns:1fr auto;align-items:center;gap:28px;padding:20px 22px;border:1px solid var(--black);background:var(--paper);box-shadow:0 16px 45px rgba(0,0,0,.18)}
+.cookie-banner.open{display:grid}
+.cookie-banner p{max-width:760px;margin:8px 0 0;font-size:12px;line-height:1.6;color:#555b60}
+.cookie-banner p a{text-decoration:underline;text-underline-offset:2px;color:var(--black)}
+.cookie-actions{display:flex;align-items:center;gap:10px}
+.cookie-actions .btn{white-space:nowrap}
 .stay-request-confirmation{display:none;border-top:1px solid var(--black);padding-top:28px}
 .stay-confirm-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .stay-confirm-icon{width:42px;height:42px;border:1px solid var(--black);display:grid;place-items:center;font-size:22px;line-height:1;flex:0 0 auto}
@@ -725,7 +731,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   .pri-hero-copy h1{font-size:52px}
 }
 
-@media(max-width:720px){.privacy-grid{grid-template-columns:1fr;gap:24px}.privacy{padding:44px 0}}
+@media(max-width:720px){.privacy-grid{grid-template-columns:1fr;gap:24px}.privacy{padding:44px 0}.cookie-banner{left:12px;right:12px;bottom:12px;grid-template-columns:1fr;gap:16px;padding:18px}.cookie-actions{display:grid;grid-template-columns:1fr}.cookie-actions .btn{width:100%}}
 
 
 .form-error{background:#fff5f5;color:#620004}
@@ -1032,6 +1038,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     <div class="privacy-copy">
       <p>When you submit a stay request or property opportunity, Sfera uses the details you provide only to review, respond to and manage that request.</p>
       <p>Submissions are delivered to Sfera’s operational email and Respond.io workspace. Access is limited to the team handling guest requests and property opportunities. Sfera does not sell submitted personal information.</p>
+      <p>Google Analytics is optional and loads only after you select “Allow analytics.” It collects usage information such as page views and interactions to help Sfera improve the website. You can <a href="#" onclick="openAnalyticsPreferences();return false;">change your analytics preference</a> at any time.</p>
       <p>To request access, correction or deletion of submitted information, email <a href="mailto:prishtinacityapartments@gmail.com">prishtinacityapartments@gmail.com</a>.</p>
     </div>
   </div>
@@ -1328,7 +1335,53 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   </div>
 </div>
 
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Analytics preferences">
+  <div>
+    <div class="micro"><span class="red-dot"></span>Analytics preferences</div>
+    <p>Sfera uses optional Google Analytics to understand visits and improve the website. It loads only if you allow it. See the <a href="#privacy">privacy notice</a>.</p>
+  </div>
+  <div class="cookie-actions">
+    <button class="btn" type="button" id="cookieReject">Continue without analytics</button>
+    <button class="btn btn-black" type="button" id="cookieAccept">Allow analytics</button>
+  </div>
+</div>
+
 <script>
+const SFERA_GA_ID='G-6JJ3GK0KK5';
+function loadGoogleAnalytics(){
+  if(window.__sferaAnalyticsLoaded)return;
+  window.__sferaAnalyticsLoaded=true;
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){window.dataLayer.push(arguments)};
+  window.gtag('js',new Date());
+  window.gtag('config',SFERA_GA_ID);
+  const analyticsScript=document.createElement('script');
+  analyticsScript.async=true;
+  analyticsScript.src=`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(SFERA_GA_ID)}`;
+  document.head.appendChild(analyticsScript);
+}
+function openAnalyticsPreferences(){document.getElementById('cookieBanner')?.classList.add('open')}
+function setAnalyticsConsent(choice){
+  let previous=null;
+  try{
+    previous=localStorage.getItem('sfera_analytics_consent');
+    localStorage.setItem('sfera_analytics_consent',choice);
+  }catch(err){console.warn('Analytics preference could not be saved',err)}
+  document.getElementById('cookieBanner')?.classList.remove('open');
+  if(choice==='granted')loadGoogleAnalytics();
+  else if(previous==='granted'&&window.__sferaAnalyticsLoaded)window.location.reload();
+}
+window.openAnalyticsPreferences=openAnalyticsPreferences;
+function initAnalyticsConsent(){
+  let choice=null;
+  try{choice=localStorage.getItem('sfera_analytics_consent')}catch(err){console.warn('Analytics preference could not be read',err)}
+  if(choice==='granted')loadGoogleAnalytics();
+  else if(choice!=='denied')openAnalyticsPreferences();
+  document.getElementById('cookieAccept')?.addEventListener('click',()=>setAnalyticsConsent('granted'));
+  document.getElementById('cookieReject')?.addEventListener('click',()=>setAnalyticsConsent('denied'));
+}
+initAnalyticsConsent();
+
 function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=document.getElementById('priPropertyPage')?.classList.contains('open')?'hidden':''}
 function outsideClose(e,id){if(e.target.id===id)closeModal(id)}
@@ -1365,6 +1418,7 @@ async function submitPropertyLead(e,form){
     const response=await fetch('/api/submit-property',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const result=await response.json().catch(()=>({}));
     if(!response.ok||!result.ok)throw new Error(result.error||'Submission failed');
+    if(window.gtag)window.gtag('event','generate_lead',{lead_type:'property'});
     form.reset();
     if(success)success.style.display='block';
   }catch(err){
@@ -1592,6 +1646,7 @@ async function submitStayRequest(e,form){
     if(title) title.textContent='Request received.';
     form.style.display='none';
     success.style.display='block';
+    if(window.gtag)window.gtag('event','generate_lead',{lead_type:'stay',property:'PRI Aparthotel',room:data.room});
     form.reset();
     document.getElementById('requestGuests').value='2';
   }catch(err){
