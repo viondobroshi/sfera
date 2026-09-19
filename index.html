@@ -425,6 +425,7 @@ button,.btn,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 .menu-btn{min-width:44px;min-height:44px;display:none;align-items:center;justify-content:center}
 .pri-mobile-cta{display:none}
+.mobile-cta-bar{display:none}
 
 @media(max-width:1050px){
   header{padding-top:env(safe-area-inset-top)}
@@ -440,7 +441,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 @media(max-width:700px){
   :root{--mobile-pad:16px}
 
-  body{font-size:15px}
+  body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
   .wrap{width:calc(100% - (var(--mobile-pad) * 2));max-width:none}
 
   /* Header / menu */
@@ -710,6 +711,25 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   }
   .pri-mobile-cta .btn{width:100%;min-height:45px;padding:10px 8px}
 
+  /* Persistent guest-first actions on the main website */
+  .mobile-cta-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:80;
+    display:grid;
+    height:auto;
+    align-items:stretch;
+    justify-content:stretch;
+    grid-template-columns:1.35fr .65fr;
+    gap:8px;
+    padding:9px var(--mobile-pad) calc(9px + env(safe-area-inset-bottom));
+    background:rgba(246,246,243,.96);
+    backdrop-filter:blur(14px);
+    border-top:1px solid #000;
+    box-shadow:0 -10px 30px rgba(0,0,0,.08);
+  }
+  .mobile-cta-bar .btn{width:100%;min-height:45px;padding:10px 8px}
+
   /* Better touch / accessibility sizing */
   .btn{min-height:44px}
   a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
@@ -751,8 +771,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <a href="#about">About</a>
       </div>
       <div class="nav-actions">
-        <button class="btn" onclick="openModal('partnerModal')">Submit property</button>
-        <button class="btn btn-black" onclick="openModal('bookingModal')">Find a stay</button>
+        <button class="btn" data-analytics="partner_header" onclick="openModal('partnerModal')">Submit property</button>
+        <button class="btn btn-black" data-analytics="find_stay_header" onclick="openModal('bookingModal')">Find a stay</button>
         <button class="menu-btn" id="menuButton" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">☰</button>
       </div>
     </nav>
@@ -774,8 +794,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <h1>Real estate,<br>operated better.</h1>
       <p>Sfera turns apartment buildings, aparthotels and selected premium villas into professionally operated hospitality assets — currently across Prishtina, Prizren and Prevallë.</p>
       <div class="hero-actions">
-        <button class="btn btn-black" onclick="document.querySelector('#partner').scrollIntoView()">Partner with Sfera</button>
-        <button class="btn" onclick="openModal('bookingModal')">Find a stay</button>
+        <button class="btn btn-black" data-analytics="partner_hero" onclick="document.querySelector('#partner').scrollIntoView()">Partner with Sfera</button>
+        <button class="btn" data-analytics="find_stay_hero" onclick="openModal('bookingModal')">Find a stay</button>
       </div>
       <div class="hero-note">
         <span>Built for owners.</span>
@@ -797,7 +817,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field"><label>Check-in</label><input name="checkin" type="date"></div>
       <div class="field"><label>Check-out</label><input name="checkout" type="date"></div>
       <div class="field"><label>Guests</label><select name="guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
-      <button class="btn btn-black" type="submit">Explore stays</button>
+      <button class="btn btn-black" data-analytics="find_stay_search" type="submit">Explore stays</button>
     </form>
     <div class="stay-search-note">Browse Sfera stays, choose your dates and send a request directly to our team.</div>
   </div>
@@ -927,7 +947,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <article class="property pri-entry">
         <div class="property-top"><div><div class="micro">Prishtina</div><h3>PRI Aparthotel</h3><p>19-room aparthotel · Urban hospitality</p></div><div class="trust">Operated by Sfera</div></div>
         <div class="property-art"><i></i><i></i><i></i></div>
-        <div class="pri-card-actions"><button class="btn btn-black" onclick="openPriProperty()">View property</button><button class="btn" onclick="openPriProperty('availability')">Check availability</button></div>
+        <div class="pri-card-actions"><button class="btn btn-black" data-analytics="view_pri_aparthotel" onclick="openPriProperty()">View property</button><button class="btn" data-analytics="check_pri_availability" onclick="openPriProperty('availability')">Check availability</button></div>
       </article>
       <article class="property">
         <div class="property-top"><div><div class="micro">Prishtina</div><h3>Prishtina City Apartments</h3><p>33 rooms & apartments · Center and Lakrishte</p></div><div class="trust">Operated by Sfera</div></div>
@@ -1336,6 +1356,11 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   </div>
 </div>
 
+<nav class="mobile-cta-bar" aria-label="Quick actions">
+  <button class="btn btn-black" type="button" data-analytics="find_stay_mobile" onclick="openModal('bookingModal')">Find a stay</button>
+  <button class="btn" type="button" data-analytics="partner_mobile" onclick="openModal('partnerModal')">Partner</button>
+</nav>
+
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Analytics preferences">
   <div>
     <div class="micro"><span class="red-dot"></span>Analytics preferences</div>
@@ -1382,6 +1407,11 @@ function initAnalyticsConsent(){
   document.getElementById('cookieReject')?.addEventListener('click',()=>setAnalyticsConsent('denied'));
 }
 initAnalyticsConsent();
+
+document.addEventListener('click',e=>{
+  const action=e.target.closest('[data-analytics]');
+  if(action&&window.gtag)window.gtag('event','cta_click',{cta_name:action.dataset.analytics});
+});
 
 function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=document.getElementById('priPropertyPage')?.classList.contains('open')?'hidden':''}
