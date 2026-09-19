@@ -4,10 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sfera — Real Estate, Operated Better.</title>
-<meta name="description" content="Sfera operates professionally managed stays and hospitality real estate. Explore Sfera stays and property partnerships.">
+<meta name="description" content="Sfera professionally operates aparthotels, serviced apartments and selected villas across Kosovo, creating reliable stays and stronger hospitality real estate.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://sfera-website-inky.vercel.app/">
 <meta name="theme-color" content="#b7bdc3">
 <meta property="og:title" content="Sfera — Real Estate, Operated Better.">
-<meta property="og:description" content="Professionally operated stays and hospitality real estate.">
+<meta property="og:description" content="Professionally operated stays, aparthotels and hospitality real estate partnerships across Kosovo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sfera-website-inky.vercel.app/">
+<meta property="og:site_name" content="Sfera">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sfera — Real Estate, Operated Better.">
+<meta name="twitter:description" content="Professionally operated stays and hospitality real estate partnerships across Kosovo.">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Sfera",
+  "url":"https://sfera-website-inky.vercel.app/",
+  "description":"Hospitality real estate operator managing aparthotels, serviced apartments and selected villas.",
+  "areaServed":["Kosovo","Balkans"],
+  "address":{"@type":"PostalAddress","addressLocality":"Prishtina","addressCountry":"XK"},
+  "email":"prishtinacityapartments@gmail.com"
+}
+</script>
 <style>
 :root {
   --sfera-grey:#b7bdc3;
@@ -156,6 +176,9 @@ h1{font-size:clamp(58px,7vw,112px);line-height:.88;letter-spacing:-.055em;margin
 label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
 input,select,textarea{border:1px solid black;background:white;color:black;padding:13px 12px;border-radius:0;outline:none;width:100%}
 textarea{min-height:100px;resize:vertical}
+.consent{display:grid;grid-template-columns:auto 1fr;align-items:start;gap:10px;font-size:11px;line-height:1.5;letter-spacing:0;text-transform:none;font-weight:400;color:#555b60}
+.consent input{width:17px;height:17px;margin:1px 0 0;padding:0;accent-color:var(--sfera-red)}
+.consent a{text-decoration:underline;text-underline-offset:2px}
 
 .partner{background:white}
 .partner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
@@ -167,6 +190,12 @@ textarea{min-height:100px;resize:vertical}
 .partner-form{border:1px solid var(--black);padding:28px;background:var(--paper)}
 .partner-form .booking-form{grid-template-columns:1fr 1fr}
 .form-success{display:none;margin-top:12px;padding:12px;border:1px solid var(--black);font-size:12px}
+.privacy{background:var(--paper);border-top:1px solid var(--black);padding:56px 0}
+.privacy-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:55px}
+.privacy h2{font-size:clamp(34px,4vw,54px);font-weight:400;letter-spacing:-.04em;line-height:1;margin:12px 0 0}
+.privacy-copy{max-width:760px}
+.privacy-copy p{font-size:13px;line-height:1.7;color:#555b60;margin:0 0 12px}
+.privacy-copy a{text-decoration:underline;text-underline-offset:3px;color:var(--black)}
 .stay-request-confirmation{display:none;border-top:1px solid var(--black);padding-top:28px}
 .stay-confirm-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .stay-confirm-icon{width:42px;height:42px;border:1px solid var(--black);display:grid;place-items:center;font-size:22px;line-height:1;flex:0 0 auto}
@@ -696,6 +725,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   .pri-hero-copy h1{font-size:52px}
 }
 
+@media(max-width:720px){.privacy-grid{grid-template-columns:1fr;gap:24px}.privacy{padding:44px 0}}
+
 
 .form-error{background:#fff5f5;color:#620004}
 #stayRequestSubmit[disabled]{opacity:.55;cursor:wait}
@@ -979,6 +1010,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the property or project."></textarea></div>
         <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
         <div class="field full form-helper">Start with the basics. Location, unit count, current status and any photos or floor plans are enough for an initial review.</div>
+        <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to review and respond to this opportunity, as described in the <a href="#privacy">privacy notice</a>.</span></label>
         <button class="btn btn-black field full" type="submit">Submit property</button>
       </div>
       <div class="form-success">Thank you. Your property has been submitted to Sfera for review.</div>
@@ -994,6 +1026,17 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
   </div>
 </div>
 
+<section class="privacy" id="privacy" aria-labelledby="privacy-title">
+  <div class="wrap privacy-grid">
+    <div><div class="micro"><span class="red-dot"></span>Your information</div><h2 id="privacy-title">Privacy notice.</h2></div>
+    <div class="privacy-copy">
+      <p>When you submit a stay request or property opportunity, Sfera uses the details you provide only to review, respond to and manage that request.</p>
+      <p>Submissions are delivered to Sfera’s operational email and Respond.io workspace. Access is limited to the team handling guest requests and property opportunities. Sfera does not sell submitted personal information.</p>
+      <p>To request access, correction or deletion of submitted information, email <a href="mailto:prishtinacityapartments@gmail.com">prishtinacityapartments@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="footer-grid">
@@ -1003,7 +1046,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       </div>
       <div><h4>Guests</h4><a href="#stays">Stays</a><a href="#portfolio">Portfolio</a><a href="#" onclick="openModal('bookingModal');return false;">Find a stay</a></div>
       <div><h4>Partners</h4><a href="#partner">Partner with Sfera</a><a href="#what-we-do">What we do</a><a href="#portfolio">Portfolio</a></div>
-      <div><h4>Sfera</h4><p>Prishtina, Kosovo</p><p>mail@sfera.biz</p><p>Built as a regional hospitality operating brand.</p></div>
+      <div><h4>Sfera</h4><p>Prishtina, Kosovo</p><p>mail@sfera.biz</p><a href="#privacy">Privacy notice</a><p>Built as a regional hospitality operating brand.</p></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Sfera</span><span>Hospitality real estate operator</span></div>
   </div>
@@ -1217,6 +1260,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field"><label>Check-out</label><input name="checkOut" id="requestOut" type="date" required></div>
       <div class="field full"><label>Message</label><textarea name="message" placeholder="Optional"></textarea></div>
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+      <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to respond to this stay request, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
       <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
       <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
       <div id="stayRequestFallback" class="field full" style="display:none;margin-top:2px">
@@ -1276,6 +1320,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field full"><label>Property link / plans</label><input name="link" type="url" placeholder="Optional: listing, Drive link, plans or brochure"></div>
       <div class="field full"><label>Opportunity</label><textarea name="opportunity" placeholder="Tell us about the asset or project."></textarea></div>
       <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+      <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to Sfera using these details to review and respond to this opportunity, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
       <button class="btn btn-black field full" type="submit">Submit property</button>
       <div class="form-success field full">Thank you. Your property has been submitted to Sfera for review.</div>
       <div class="form-success form-error field full">We couldn’t submit the property. Please try again.</div>
