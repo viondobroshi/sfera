@@ -426,6 +426,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 .menu-btn{min-width:44px;min-height:44px;display:none;align-items:center;justify-content:center}
 .pri-mobile-cta{display:none}
 .mobile-cta-bar{display:none}
+.whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:70;display:inline-flex;align-items:center;gap:9px;background:var(--black);color:white;box-shadow:0 12px 32px rgba(0,0,0,.2)}
+.whatsapp-float:before{content:"";width:8px;height:8px;border-radius:50%;background:#25d366;flex:0 0 auto}
 
 @media(max-width:1050px){
   header{padding-top:env(safe-area-inset-top)}
@@ -728,7 +730,8 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     border-top:1px solid #000;
     box-shadow:0 -10px 30px rgba(0,0,0,.08);
   }
-  .mobile-cta-bar .btn{width:100%;min-height:45px;padding:10px 8px}
+  .mobile-cta-bar .btn{width:100%;min-height:45px;padding:10px 8px;display:flex;align-items:center;justify-content:center;text-align:center}
+  .whatsapp-float{display:none}
 
   /* Better touch / accessibility sizing */
   .btn{min-height:44px}
@@ -1073,7 +1076,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       </div>
       <div><h4>Guests</h4><a href="#stays">Stays</a><a href="#portfolio">Portfolio</a><a href="#" onclick="openModal('bookingModal');return false;">Find a stay</a></div>
       <div><h4>Partners</h4><a href="#partner">Partner with Sfera</a><a href="#what-we-do">What we do</a><a href="#portfolio">Portfolio</a></div>
-      <div><h4>Sfera</h4><p>Prishtina, Kosovo</p><p>mail@sfera.biz</p><a href="#privacy">Privacy notice</a><p>Built as a regional hospitality operating brand.</p></div>
+      <div><h4>Sfera</h4><p>Prishtina, Kosovo</p><p>mail@sfera.biz</p><a href="https://wa.me/38348101070?text=Hello%20Sfera%2C%20I%27m%20interested%20in%20booking%20a%20stay." target="_blank" rel="noopener noreferrer" data-analytics="whatsapp_footer">WhatsApp: +383 48 101 070</a><a href="#privacy">Privacy notice</a><p>Built as a regional hospitality operating brand.</p></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Sfera</span><span>Hospitality real estate operator</span></div>
   </div>
@@ -1358,8 +1361,10 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
 <nav class="mobile-cta-bar" aria-label="Quick actions">
   <button class="btn btn-black" type="button" data-analytics="find_stay_mobile" onclick="openModal('bookingModal')">Find a stay</button>
-  <button class="btn" type="button" data-analytics="partner_mobile" onclick="openModal('partnerModal')">Partner</button>
+  <a class="btn" data-analytics="whatsapp_mobile" href="https://wa.me/38348101070?text=Hello%20Sfera%2C%20I%27m%20interested%20in%20booking%20a%20stay." target="_blank" rel="noopener noreferrer">WhatsApp</a>
 </nav>
+
+<a class="btn whatsapp-float" data-analytics="whatsapp_desktop" href="https://wa.me/38348101070?text=Hello%20Sfera%2C%20I%27m%20interested%20in%20booking%20a%20stay." target="_blank" rel="noopener noreferrer" aria-label="Contact Sfera on WhatsApp">WhatsApp</a>
 
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Analytics preferences">
   <div>
