@@ -17,18 +17,26 @@ window.SferaBooking=(()=>{
  <label>Guests<select name="guests">${Array.from({length:8},(_,i)=>`<option value="${i+1}">${i+1} guest${i?'s':''}</option>`).join('')}</select></label>
  <label>Your name<input name="name" autocomplete="name" required maxlength="150"></label>
  <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
- <label>WhatsApp / phone<input name="phone" type="tel" autocomplete="tel" placeholder="+383 48 123 456" required pattern="\\+[0-9 ().-]{8,20}" title="Include your country code, for example +383 48 123 456"></label>
+ <label>WhatsApp / phone<input name="phone" type="tel" autocomplete="tel" placeholder="+383 48 123 456" required title="Include your country code, for example +383 48 123 456"></label>
  <label class="sb-wide">Message (optional)<textarea name="message" rows="3" maxlength="3000"></textarea></label>
  <input type="hidden" name="acknowledgementVersion" value="stay-v1"><input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="sb-trap">
  <label class="sb-consent sb-wide"><input name="privacyConsent" type="checkbox" required><span>I agree to receive a request acknowledgement and updates from Sfera by WhatsApp and email. <a href="/#privacy" target="_blank" rel="noopener">Privacy notice</a>.</span></label>
  <p class="sb-wide sb-notice">This is a booking request. Your reservation is confirmed only after the Sfera team checks availability and confirms it with you.</p>
  <p class="sb-error sb-wide" role="alert" hidden></p><button class="sb-submit sb-wide" type="submit">Send booking request</button>
  <a class="sb-fallback sb-wide" hidden target="_blank" rel="noopener">Send request on WhatsApp</a></form>
- <section class="sb-success" hidden role="status"><h3>Request received</h3><p>Our team will check availability and contact you by WhatsApp or email. Your booking is not confirmed yet.</p><dl></dl><button type="button" class="sb-done">Done</button></section>`;
+ <section class="sb-success" hidden role="status" tabindex="-1"><h3>Request received</h3><p>Our team will check availability and contact you by WhatsApp or email. Your booking is not confirmed yet.</p><dl></dl><button type="button" class="sb-done">Done</button></section>`;
  document.body.append(dialog);
  const form=dialog.querySelector('form'),status=dialog.querySelector('.sb-loading'),error=dialog.querySelector('.sb-error'),success=dialog.querySelector('.sb-success'),submit=form.querySelector('[type="submit"]'),fallback=dialog.querySelector('.sb-fallback');
  const field=name=>form.elements.namedItem(name);
  let properties=[],busy=false,openVersion=0;
+ function validateContact(){
+  const phone=field('phone'),email=field('email'),name=field('name');
+  phone.setCustomValidity(phone.value&&!/^\+[1-9]\d{7,14}$/.test(phone.value.replace(/[\s().-]/g,''))?'Enter a valid phone number with country code, for example +383 48 123 456.':'');
+  email.setCustomValidity(email.value&&!/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(email.value.trim())?'Enter a valid email address, for example name@example.com.':'');
+  name.setCustomValidity(name.value&&!name.value.trim()?'Enter your name.':'');
+ }
+ ['phone','email','name'].forEach(name=>field(name).addEventListener('input',validateContact));
+ form.addEventListener('input',()=>{error.hidden=true;fallback.hidden=true;});
  const close=()=>{if(!busy){openVersion++;dialog.close();}};
  dialog.querySelector('.sb-close').onclick=close;dialog.querySelector('.sb-done').onclick=close;
  dialog.addEventListener('cancel',e=>{if(busy)e.preventDefault();else openVersion++;});
@@ -48,11 +56,11 @@ window.SferaBooking=(()=>{
   if(busy)return;const version=++openVersion;form.hidden=true;success.hidden=true;error.hidden=true;fallback.hidden=true;status.textContent='Loading booking options…';if(!dialog.open)dialog.showModal();
   try{properties=await catalog;if(version!==openVersion)return;options(field('property'),properties.map(p=>[p.id,p.name]));field('property').value=properties.some(p=>p.id===key)?key:'pri';rooms(room);
    const saved={...preferences};for(const [k,v] of Object.entries(values))if(v)saved[k]=v;
-   field('checkIn').value=saved.checkIn||'';field('checkOut').value=saved.checkOut||'';field('guests').value=/^[1-8]$/.test(saved.guests)?saved.guests:'2';dates();status.textContent='';form.hidden=false;field('checkIn').focus();
+   field('checkIn').value=saved.checkIn||'';field('checkOut').value=saved.checkOut||'';field('guests').value=/^[1-8]$/.test(saved.guests)?saved.guests:'2';dates();validateContact();status.textContent='';form.hidden=false;dialog.scrollTop=0;field('checkIn').focus({preventScroll:true});
   }catch{status.textContent='We couldn’t load booking options. Please refresh and try again, or contact Sfera on WhatsApp at +383 48 101 070.';}
  }
  form.addEventListener('submit',async e=>{
-  e.preventDefault();if(busy)return;dates();if(!form.reportValidity())return;
+  e.preventDefault();if(busy)return;dates();validateContact();if(!form.reportValidity())return;
   const data=Object.fromEntries(new FormData(form)),property=properties.find(p=>p.id===data.property);if(!property)return;
   busy=true;submit.disabled=true;submit.textContent='Sending…';error.hidden=true;fallback.hidden=true;
   const text=['Hello Sfera, I would like to request a booking.','Property: '+property.name,'Room: '+data.room,'Check-in: '+data.checkIn,'Check-out: '+data.checkOut,'Guests: '+data.guests,'Name: '+data.name,'Email: '+data.email,'Phone: '+data.phone,'Message: '+data.message].join('\n');
@@ -62,8 +70,8 @@ window.SferaBooking=(()=>{
    if(!response.ok||!result.ok)throw Error(result.error||'Delivery failed');
    const summary=success.querySelector('dl');summary.replaceChildren();
    for(const [label,value] of [['Property',property.name],['Room',data.room],['Dates',data.checkIn+' → '+data.checkOut],['Guests',data.guests]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;summary.append(dt,dd);}
-   form.hidden=true;success.hidden=false;form.reset();if(window.gtag)window.gtag('event','generate_lead',{lead_type:'stay',property:property.name,room:data.room});
-  }catch{error.textContent='We couldn’t confirm delivery. Try again or send this request to Sfera on WhatsApp.';error.hidden=false;fallback.hidden=false;}
+   form.hidden=true;success.hidden=false;dialog.scrollTop=0;success.focus({preventScroll:true});form.reset();validateContact();if(window.gtag)window.gtag('event','generate_lead',{lead_type:'stay',property:property.name,room:data.room});
+  }catch{error.textContent='We couldn’t confirm delivery. Try again or send this request to Sfera on WhatsApp.';error.hidden=false;fallback.hidden=false;error.scrollIntoView({block:'nearest'});}
   finally{busy=false;submit.disabled=false;submit.textContent='Send booking request';}
  });
  document.querySelectorAll('input[type="date"]').forEach(input=>input.min=today());
