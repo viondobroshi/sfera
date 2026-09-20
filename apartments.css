@@ -4,3 +4,5 @@
 
 /* Preserve photo proportions and readable property names on phones. */
 .room-card img,.photo-grid img{height:auto}.intro h1,.dialog-top h2{overflow-wrap:anywhere}.dialog-top>div{min-width:0}.button{white-space:normal;text-align:center}.photo-grid button{min-width:0}@media(max-width:480px){.intro h1{font-size:clamp(36px,11vw,52px)}.enquiry{padding:20px}.enquiry .button{display:block;width:100%}.dialog-top h2{font-size:22px}}
+
+.back-properties{display:inline-block;padding:10px 0;font-size:14px;text-decoration:underline}.intro{padding-top:30px}.room-booking-bar{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);z-index:2}.photo-unavailable{background:#e4e6e7;color:#555}.property-tabs{scroll-margin-top:20px}@media(max-width:600px){.property-tabs{display:flex;overflow-x:auto;scroll-snap-type:x proximity;gap:0}.property-tabs a{flex:0 0 75%;scroll-snap-align:start}.room-booking-bar{display:flex;padding:12px 16px;gap:12px}.room-booking-bar p{font-size:13px;margin:0}.room-booking-bar .button{width:auto;flex-shrink:0;margin:0;padding:12px}.intro h1{margin-top:16px}}

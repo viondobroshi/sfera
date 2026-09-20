@@ -16,6 +16,8 @@ export default async function handler(req, res) {
       status = '',
       link = '',
       opportunity = '',
+      attachment = null,
+      privacyConsent = '',
       website = ''
     } = body;
 
@@ -31,6 +33,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Invalid email address' });
     }
 
+    if(!['on',true].includes(privacyConsent))return res.status(400).json({ok:false,error:'Please agree to the privacy notice.'});
+    let document = null;
+    if(attachment){
+      if(typeof attachment.name!=='string'||typeof attachment.data!=='string'||attachment.name.length>180||/[\x00-\x1f\x7f/\\]/.test(attachment.name)||! /\.(pdf|docx?|xlsx?|pptx?|jpe?g|png|webp|txt)$/i.test(attachment.name)||attachment.data.length>2796204)return res.status(400).json({ok:false,error:'Please choose a supported file up to 2 MB.'});
+      const bytes=Buffer.from(attachment.data,'base64');
+      if(!bytes.length||bytes.length>2*1024*1024||bytes.toString('base64')!==attachment.data)return res.status(400).json({ok:false,error:'The attachment must be between 1 byte and 2 MB.'});
+      document={name:attachment.name,data:bytes.toString('base64')};
+    }
     const webhookUrl = process.env.MAKE_WEBHOOK_URL;
     if (!webhookUrl) {
       return res.status(500).json({ ok: false, error: 'Make webhook is not configured' });
@@ -48,6 +58,7 @@ Property type: ${clean(propertyType)}
 Units: ${clean(units) || 'Not provided'}
 Status: ${clean(status) || 'Not provided'}
 Property link / plans: ${clean(link) || 'Not provided'}
+Document: ${document ? document.name + ' (sent in a separate attachment email)' : 'None'}
 
 Opportunity:
 ${clean(opportunity) || 'No additional details provided'}
@@ -68,7 +79,8 @@ Submitted: ${submittedAt}`;
       opportunity: clean(opportunity),
       commentText: details,
       emailBody: details,
-      submittedAt
+      submittedAt,
+      attachment: document
     };
 
     const response = await fetch(webhookUrl, {

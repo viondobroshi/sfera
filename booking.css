@@ -3,3 +3,5 @@
 
 /* Keep booking controls readable and contained on narrow screens. */
 .sb-form label,.sb-room-note,.sb-notice,.sb-form .sb-consent{font-size:14px}.sb-close{flex-shrink:0}.sb-head h2{overflow-wrap:anywhere}.sfera-booking{overscroll-behavior:contain}.sb-form input:focus,.sb-form select:focus,.sb-form textarea:focus{border-color:#111}.sb-fallback{padding:12px 0;min-height:44px}.sb-success:focus{outline:none}
+
+.field input[type=file]{width:100%;max-width:100%;font-size:16px;padding:12px 0}.field small{display:block;font-size:13px;line-height:1.5;color:#555}.field label:has(input[type=file]){display:block}
