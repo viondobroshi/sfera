@@ -761,6 +761,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 #stayRequestSubmit[disabled]{opacity:.55;cursor:wait}
 .property-photo{display:block;width:100%;height:320px;object-fit:cover}.apartment-entry .pri-card-actions{margin-top:18px}@media(max-width:600px){.property-photo{height:250px}}
 </style>
+<link rel="stylesheet" href="/booking.css"><script src="/booking.js" defer></script>
 </head>
 <body id="top">
 <header>
@@ -820,7 +821,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field"><label>Destination</label><select name="destination"><option>Prishtina</option><option>Prizren</option><option>Prevallë</option></select></div>
       <div class="field"><label>Check-in</label><input name="checkin" type="date"></div>
       <div class="field"><label>Check-out</label><input name="checkout" type="date"></div>
-      <div class="field"><label>Guests</label><select name="guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
+      <div class="field"><label>Guests</label><select name="guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option><option value="7">7 guests</option><option value="8">8 guests</option></select></div>
       <button class="btn btn-black" data-analytics="find_stay_search" type="submit">Explore stays</button>
     </form>
     <div class="stay-search-note">Browse Sfera stays, choose your dates and send a request directly to our team.</div>
@@ -941,37 +942,14 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 <section class="section portfolio" id="portfolio">
   <div class="wrap">
     <div class="section-head">
-      <div class="micro"><span class="red-dot"></span>Portfolio preview</div>
+      <div class="micro"><span class="red-dot"></span>Our properties</div>
       <div><h2>Independent properties. One operating standard.</h2></div>
       <div></div>
       <p>Explore our properties and find your next stay. Each has its own character, with the care and consistency of Sfera.</p>
     </div>
 
-    <div class="portfolio-grid">
-      <article class="property pri-entry">
-        <div class="property-top"><div><div class="micro">Prishtina</div><h3>PRI Aparthotel</h3><p>19-room aparthotel · Urban hospitality</p></div><div class="trust">Operated by Sfera</div></div>
-        <div class="property-art"><i></i><i></i><i></i></div>
-        <div class="pri-card-actions"><button class="btn btn-black" data-analytics="view_pri_aparthotel" onclick="openPriProperty()">View property</button><button class="btn" data-analytics="check_pri_availability" onclick="openPriProperty('availability')">Check availability</button></div>
-      </article>
-      <article class="property apartment-entry">
-        <div class="property-top"><div><div class="micro">Prishtina · City center</div><h3>Prishtina City Apartments</h3><p>23 rooms · Explore the room galleries</p></div><div class="trust">Operated by Sfera</div></div>
-        <a href="/apartments?property=pca" aria-label="Explore Prishtina City Apartments"><img class="property-photo" src="/photos/pca-room-305/01.webp" alt="Interior of Prishtina City Apartments" width="1400" height="933" loading="lazy"></a>
-        <div class="pri-card-actions"><a class="btn btn-black" data-analytics="view_pca_gallery" href="/apartments?property=pca">Explore rooms &amp; photos</a></div>
-      </article>
-      <article class="property apartment-entry">
-        <div class="property-top"><div><div class="micro">Prishtina · Nartel</div><h3>Prishtina City Apartments 2</h3><p>10 apartments · Explore the room galleries</p></div><div class="trust">Operated by Sfera</div></div>
-        <a href="/apartments?property=pca2" aria-label="Explore Prishtina City Apartments 2"><img class="property-photo" src="/photos/nartel-61/01.webp" alt="Interior of Prishtina City Apartments 2" width="1400" height="933" loading="lazy"></a>
-        <div class="pri-card-actions"><a class="btn btn-black" data-analytics="view_pca2_gallery" href="/apartments?property=pca2">Explore rooms &amp; photos</a></div>
-      </article>
-      <article class="property">
-        <div class="property-top"><div><div class="micro">Prizren</div><h3>Agara Stays</h3><p>15-room stay · Historic city center</p></div><div class="trust">Operated by Sfera</div></div>
-        <div class="property-art"><i></i><i></i><i></i></div>
-      </article>
-      <article class="property">
-        <div class="property-top"><div><div class="micro">Prevallë</div><h3>Villa Hilltop</h3><p>Private wellness villa · Up to 8 guests</p></div><div class="trust">Operated by Sfera</div></div>
-        <div class="property-art"><i></i><i></i><i></i></div>
-      </article>
-    </div>
+    <p id="stay-filter-status" aria-live="polite"></p><button id="show-all-stays" class="btn" hidden onclick="filterStays('All destinations')">Show all properties</button>
+    <div class="portfolio-grid"><article class="property apartment-entry" data-destination="Prishtina"><div class="property-top"><div><div class="micro">Prishtina</div><h3>PRI Aparthotel</h3><p>19-room aparthotel · Urban hospitality</p></div><div class="trust">Operated by Sfera</div></div><a class="property-cover" href="/apartments?property=pri" aria-label="Explore PRI Aparthotel"><img class="property-photo" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1703510387631530141/original/6252d74f-81ac-49f2-86b0-78be79be1dbc.jpeg?im_w=1200" alt="PRI Aparthotel" width="1400" height="933" loading="lazy"></a><div class="pri-card-actions"><a class="btn" href="/apartments?property=pri">View rooms &amp; photos</a><button class="btn btn-black" onclick="SferaBooking.open('pri')">Request to book</button></div></article><article class="property apartment-entry" data-destination="Prishtina"><div class="property-top"><div><div class="micro">Prishtina · City center</div><h3>Prishtina City Apartments</h3><p>23 rooms · City-center stays</p></div><div class="trust">Operated by Sfera</div></div><a class="property-cover" href="/apartments?property=pca" aria-label="Explore Prishtina City Apartments"><img class="property-photo" src="/photos/pca-room-305/01.webp" alt="Prishtina City Apartments" width="1400" height="933" loading="lazy"></a><div class="pri-card-actions"><a class="btn" href="/apartments?property=pca">View rooms &amp; photos</a><button class="btn btn-black" onclick="SferaBooking.open('pca')">Request to book</button></div></article><article class="property apartment-entry" data-destination="Prishtina"><div class="property-top"><div><div class="micro">Prishtina · Nartel</div><h3>Prishtina City Apartments 2</h3><p>10 apartments · Space to settle in</p></div><div class="trust">Operated by Sfera</div></div><a class="property-cover" href="/apartments?property=pca2" aria-label="Explore Prishtina City Apartments 2"><img class="property-photo" src="/photos/nartel-61/01.webp" alt="Prishtina City Apartments 2" width="1400" height="933" loading="lazy"></a><div class="pri-card-actions"><a class="btn" href="/apartments?property=pca2">View rooms &amp; photos</a><button class="btn btn-black" onclick="SferaBooking.open('pca2')">Request to book</button></div></article><article class="property apartment-entry" data-destination="Prizren"><div class="property-top"><div><div class="micro">Prizren</div><h3>Agara Stays</h3><p>15-room stay · Historic city center</p></div><div class="trust">Operated by Sfera</div></div><a class="property-cover" href="/apartments?property=agara" aria-label="Explore Agara Stays"><div class="property-photo photo-placeholder"><span>Property photography coming soon</span></div></a><div class="pri-card-actions"><a class="btn" href="/apartments?property=agara">View rooms &amp; photos</a><button class="btn btn-black" onclick="SferaBooking.open('agara')">Request to book</button></div></article><article class="property apartment-entry" data-destination="Prevallë"><div class="property-top"><div><div class="micro">Prevallë</div><h3>Villa Hilltop</h3><p>Private wellness villa · Up to 8 guests</p></div><div class="trust">Operated by Sfera</div></div><a class="property-cover" href="/apartments?property=hilltop" aria-label="Explore Villa Hilltop"><div class="property-photo photo-placeholder"><span>Property photography coming soon</span></div></a><div class="pri-card-actions"><a class="btn" href="/apartments?property=hilltop">View rooms &amp; photos</a><button class="btn btn-black" onclick="SferaBooking.open('hilltop')">Request to book</button></div></article></div>
   </div>
 </section>
 
@@ -1004,13 +982,13 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <p>Explore Sfera-operated properties and rooms in one place, then send your preferred room and dates directly to the Sfera team.</p>
     </div>
     <div class="booking-card">
-      <div class="micro"><span class="red-dot"></span>Booking experience preview</div>
+      <div class="micro"><span class="red-dot"></span>Request a stay</div>
       <h3>Find a Sfera stay</h3>
       <form class="booking-form" onsubmit="demoBooking(event)">
         <div class="field full"><label>Destination</label><select><option>All destinations</option><option>Prishtina</option><option>Prizren</option><option>Prevallë</option></select></div>
         <div class="field"><label>Check-in</label><input type="date"></div>
         <div class="field"><label>Check-out</label><input type="date"></div>
-        <div class="field full"><label>Guests</label><select><option>2 guests</option><option>1 guest</option><option>3 guests</option><option>4+ guests</option></select></div>
+        <div class="field full"><label>Guests</label><select><option>2 guests</option><option>1 guest</option><option>3 guests</option><option>4 guests</option><option>5 guests</option><option>6 guests</option><option>7 guests</option><option>8 guests</option></select></div>
         <button class="btn btn-black field full" type="submit">Search stays</button>
       </form>
     </div>
@@ -1219,7 +1197,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
           <div class="field full"><label>Room</label><select id="priAvailRoom"></select></div>
           <div class="field"><label>Check-in</label><input id="priCheckIn" type="date"></div>
           <div class="field"><label>Check-out</label><input id="priCheckOut" type="date"></div>
-          <div class="field full"><label>Guests</label><select id="priGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
+          <div class="field full"><label>Guests</label><select id="priGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option><option value="7">7 guests</option><option value="8">8 guests</option></select></div>
           <button class="btn btn-black field full" type="button" onclick="openStayRequest()">Request with Sfera</button>
         </div>
         <div class="pri-channel-note">A Sfera team member will review the request and contact the guest before the reservation is confirmed.</div>
@@ -1281,56 +1259,6 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 </div>
 
 
-<div class="modal" id="stayRequestModal" onclick="outsideClose(event,'stayRequestModal')">
-  <div class="modal-card">
-    <div class="modal-head">
-      <div><div class="micro"><span class="red-dot"></span>Sfera stay request</div><h3 id="stayRequestModalTitle">Request a stay.</h3></div>
-      <button class="close" onclick="closeModal('stayRequestModal')">×</button>
-    </div>
-    <form class="booking-form" id="stayRequestForm" onsubmit="submitStayRequest(event,this)">
-      <div class="field"><label>Name</label><input name="name" required autocomplete="name" placeholder="Guest name"></div>
-      <div class="field"><label>WhatsApp / phone</label><input name="phone" required type="tel" autocomplete="tel" placeholder="+383 ..." pattern="\+[0-9 \(\)\.\-]{8,20}" title="Include your country code, for example +383 48 123 456"></div>
-      <div class="field full"><label>Email</label><input name="email" required type="email" autocomplete="email" placeholder="guest@email.com"></div>
-      <div class="field"><label>Room</label><select name="room" id="requestRoom"></select></div>
-      <div class="field"><label>Guests</label><select name="guests" id="requestGuests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4+ guests</option></select></div>
-      <div class="field"><label>Check-in</label><input name="checkIn" id="requestIn" type="date" required></div>
-      <div class="field"><label>Check-out</label><input name="checkOut" id="requestOut" type="date" required></div>
-      <div class="field full"><label>Message</label><textarea name="message" placeholder="Optional"></textarea></div>
-      <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-      <input type="hidden" name="acknowledgementVersion" value="stay-v1">
-      <label class="consent field full"><input name="privacyConsent" type="checkbox" required><span>I agree to receive a request acknowledgement and updates about this stay request from Sfera by WhatsApp and email, as described in the <a href="#privacy" target="_blank" rel="noopener">privacy notice</a>.</span></label>
-      <button class="btn btn-black field full" id="stayRequestSubmit" type="submit">Send request to Sfera</button>
-      <div class="form-error" id="stayRequestError" style="display:none;border:1px solid #bf0005;padding:12px;margin-top:10px;font-size:12px">We couldn't send the request. Please try again.</div>
-      <div id="stayRequestFallback" class="field full" style="display:none;margin-top:2px">
-        <a class="btn btn-black" id="stayRequestFallbackWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
-      </div>
-    </form>
-    <div class="stay-request-confirmation" id="stayRequestSuccess" aria-live="polite">
-      <div class="stay-confirm-top">
-        <div class="stay-confirm-icon" aria-hidden="true">✓</div>
-        <div class="micro"><span class="red-dot"></span>Request received</div>
-      </div>
-      <h4>Thank you, <span id="stayConfirmName">guest</span>.</h4>
-      <p class="stay-confirm-lead">Your stay request has been sent to Sfera. Our team will review availability and contact you shortly.</p>
-      <div class="stay-confirm-summary">
-        <div class="stay-confirm-row"><span>Property</span><strong>PRI Aparthotel</strong></div>
-        <div class="stay-confirm-row"><span>Room</span><strong id="stayConfirmRoom">—</strong></div>
-        <div class="stay-confirm-row"><span>Dates</span><strong id="stayConfirmDates">—</strong></div>
-        <div class="stay-confirm-row"><span>Guests</span><strong id="stayConfirmGuests">—</strong></div>
-      </div>
-      <div class="stay-confirm-next">
-        <b>What happens next?</b>
-        <p>A Sfera team member will review your dates and contact you to confirm availability and the reservation.</p>
-      </div>
-      <div class="stay-confirm-actions">
-        <a class="btn btn-black" id="stayRequestWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
-        <button class="btn" type="button" onclick="closeModal('stayRequestModal')">Close</button>
-      </div>
-      <p class="stay-confirm-note">This is a stay request and is not confirmed until you receive confirmation from Sfera.</p>
-    </div>
-  </div>
-</div>
-
 <div class="modal" id="bookingModal" onclick="outsideClose(event,'bookingModal')">
   <div class="modal-card">
     <div class="modal-head"><div><div class="micro"><span class="red-dot"></span>Sfera stays</div><h3>Find a stay.</h3></div><button class="close" onclick="closeModal('bookingModal')">×</button></div>
@@ -1338,7 +1266,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="field full"><label>Destination</label><select><option>All destinations</option><option>Prishtina</option><option>Prizren</option><option>Prevallë</option></select></div>
       <div class="field"><label>Check-in</label><input type="date"></div>
       <div class="field"><label>Check-out</label><input type="date"></div>
-      <div class="field full"><label>Guests</label><select><option>2 guests</option><option>1 guest</option><option>3 guests</option><option>4+ guests</option></select></div>
+      <div class="field full"><label>Guests</label><select><option>2 guests</option><option>1 guest</option><option>3 guests</option><option>4 guests</option><option>5 guests</option><option>6 guests</option><option>7 guests</option><option>8 guests</option></select></div>
       <button class="btn btn-black field full" type="submit">Explore stays</button>
     </form>
   </div>
@@ -1562,34 +1490,21 @@ if(priAvailRoom) priAvailRoom.innerHTML=priRooms.map(r=>`<option value="${r.room
 
 
 
-// Existing booking buttons now lead into the property experience instead of an alert-only demo.
-function demoBooking(e){
-  e.preventDefault();
-  const form=e.target;
-  const destination=form.querySelector('select')?.value||'Prishtina';
-  closeModal('bookingModal');
-  if(destination==='Prishtina'||destination==='All destinations') openPriProperty();
-  else document.querySelector('#portfolio').scrollIntoView({behavior:'smooth'});
+function filterStays(destination){
+ const cards=[...document.querySelectorAll('.portfolio-grid .property')];let count=0;
+ cards.forEach(card=>{card.hidden=destination!=='All destinations'&&card.dataset.destination!==destination;if(!card.hidden)count++;});
+ document.getElementById('stay-filter-status').textContent=count+' properties'+(destination==='All destinations'?'':' in '+destination)+'. Choose a property to explore rooms or request to book.';
+ document.getElementById('show-all-stays').hidden=destination==='All destinations';
+ document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
 }
-
-
+function demoBooking(e){
+ e.preventDefault();const form=e.target;const selects=form.querySelectorAll('select');const dates=form.querySelectorAll('input[type="date"]');
+ if(!SferaBooking.remember({checkIn:dates[0].value,checkOut:dates[1].value,guests:selects[1].value.match(/\d+/)?.[0]||'2'},dates[1]))return;
+ closeModal('bookingModal');filterStays(selects[0].value);
+}
 function findStay(e,form){
-  e.preventDefault();
-  const dest=form.elements.destination.value;
-  const cin=form.elements.checkin.value||'';
-  const cout=form.elements.checkout.value||'';
-  const guests=form.elements.guests.value||'2';
-  if(dest==='Prishtina'){
-    openPriProperty();
-    setTimeout(()=>{
-      document.getElementById('priCheckIn').value=cin;
-      document.getElementById('priCheckOut').value=cout;
-      document.getElementById('priGuests').value=guests;
-      scrollPri('priAvailability');
-    },80);
-  }else{
-    document.querySelector('#portfolio').scrollIntoView({behavior:'smooth'});
-  }
+ e.preventDefault();if(!SferaBooking.remember({checkIn:form.elements.checkin.value,checkOut:form.elements.checkout.value,guests:form.elements.guests.value},form.elements.checkout))return;
+ filterStays(form.elements.destination.value);
 }
 function portfolioComingSoon(name){alert(name+' will use the same property-page system after its content and photos are added.');}
 let currentPriRoom = null;
@@ -1605,104 +1520,7 @@ function requestCurrentRoom(){
   else openStayRequest();
 }
 function openStayRequest(){
-  const room=document.getElementById('priAvailRoom')?.value||priRooms[0].room;
-  const cin=document.getElementById('priCheckIn')?.value||'';
-  const cout=document.getElementById('priCheckOut')?.value||'';
-  const guests=document.getElementById('priGuests')?.value||'2';
-  const roomSel=document.getElementById('requestRoom');
-  const form=document.getElementById('stayRequestForm');
-  const success=document.getElementById('stayRequestSuccess');
-  const fallback=document.getElementById('stayRequestFallback');
-  const title=document.getElementById('stayRequestModalTitle');
-  if(form) form.style.display='grid';
-  if(success) success.style.display='none';
-  if(fallback) fallback.style.display='none';
-  if(title) title.textContent='Request a stay.';
-  roomSel.innerHTML=priRooms.map(r=>`<option value="${r.room}">Room ${r.room}</option>`).join('');
-  roomSel.value=room;
-  document.getElementById('requestIn').value=cin;
-  document.getElementById('requestOut').value=cout;
-  document.getElementById('requestGuests').value=guests;
-  openModal('stayRequestModal');
-}
-async function submitStayRequest(e,form){
-  e.preventDefault();
-  const submit=document.getElementById('stayRequestSubmit');
-  const success=document.getElementById('stayRequestSuccess');
-  const error=document.getElementById('stayRequestError');
-  success.style.display='none';
-  error.style.display='none';
-
-  const data=Object.fromEntries(new FormData(form).entries());
-  const whatsappLines=[
-    'Hi Sfera, I just submitted a stay request through the website.',
-    '',
-    'Property: PRI Aparthotel',
-    `Room: ${data.room}`,
-    `Guests: ${data.guests}`,
-    `Check-in: ${data.checkIn}`,
-    `Check-out: ${data.checkOut}`,
-    `Name: ${data.name}`,
-    `Email: ${data.email}`
-  ];
-  if(data.message && data.message.trim()){
-    whatsappLines.push(`Message: ${data.message.trim()}`);
-  }
-  const whatsappUrl=`https://wa.me/38348101070?text=${encodeURIComponent(whatsappLines.join('\n'))}`;
-  ['stayRequestWhatsApp','stayRequestFallbackWhatsApp'].forEach(id=>{
-    const button=document.getElementById(id);
-    if(button) button.href=whatsappUrl;
-  });
-
-  if(!data.checkIn || !data.checkOut || data.checkOut<=data.checkIn){
-    error.textContent='Please choose valid check-in and check-out dates.';
-    error.style.display='block';
-    return;
-  }
-
-  submit.disabled=true;
-  submit.textContent='Sending…';
-
-  try{
-    const response=await fetch('/api/request-stay',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    });
-    const result=await response.json().catch(()=>({}));
-
-    if(!response.ok || !result.ok){
-      throw new Error(result.error || 'Request failed');
-    }
-
-    const formatStayDate=(value)=>{
-      if(!value) return '—';
-      const d=new Date(`${value}T12:00:00`);
-      return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    };
-    const guestName=(data.name||'Guest').trim();
-    const guestLabel=data.guests==='1'?'1 guest':(data.guests==='4'?'4+ guests':`${data.guests} guests`);
-    document.getElementById('stayConfirmName').textContent=guestName;
-    document.getElementById('stayConfirmRoom').textContent=`Room ${data.room}`;
-    document.getElementById('stayConfirmDates').textContent=`${formatStayDate(data.checkIn)} → ${formatStayDate(data.checkOut)}`;
-    document.getElementById('stayConfirmGuests').textContent=guestLabel;
-    const title=document.getElementById('stayRequestModalTitle');
-    if(title) title.textContent='Request received.';
-    form.style.display='none';
-    success.style.display='block';
-    if(window.gtag)window.gtag('event','generate_lead',{lead_type:'stay',property:'PRI Aparthotel',room:data.room});
-    form.reset();
-    document.getElementById('requestGuests').value='2';
-  }catch(err){
-    console.error(err);
-    error.textContent='We couldn’t send the request automatically. Continue on WhatsApp to send it directly to Sfera.';
-    error.style.display='block';
-    const fallback=document.getElementById('stayRequestFallback');
-    if(fallback) fallback.style.display='block';
-  }finally{
-    submit.disabled=false;
-    submit.textContent='Send request to Sfera';
-  }
+  SferaBooking.open('pri',document.getElementById('priAvailRoom')?.value,{checkIn:document.getElementById('priCheckIn')?.value,checkOut:document.getElementById('priCheckOut')?.value,guests:document.getElementById('priGuests')?.value});
 }
 
 
