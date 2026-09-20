@@ -57,6 +57,7 @@ export default async function handler(req, res) {
       message: {
         type: 'whatsapp_template',
         template: {
+          id: 47577361,
           name: 'follow_up', languageCode: 'en',
           components: [{ type: 'body', parameters: [
             { type: 'text', text: String(name).trim().replace(/\s+/g, ' ').slice(0, 100) },
