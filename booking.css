@@ -5,3 +5,8 @@
 .sb-form label,.sb-room-note,.sb-notice,.sb-form .sb-consent{font-size:14px}.sb-close{flex-shrink:0}.sb-head h2{overflow-wrap:anywhere}.sfera-booking{overscroll-behavior:contain}.sb-form input:focus,.sb-form select:focus,.sb-form textarea:focus{border-color:#111}.sb-fallback{padding:12px 0;min-height:44px}.sb-success:focus{outline:none}
 
 .field input[type=file]{width:100%;max-width:100%;font-size:16px;padding:12px 0}.field small{display:block;font-size:13px;line-height:1.5;color:#555}.field label:has(input[type=file]){display:block}
+
+/* A single red search section, carried through the request flow. */
+#find-stay{scroll-margin-top:90px}#find-stay .booking-card{border:0}#find-stay .field label{font-size:12px}#find-stay input,#find-stay select{font-size:16px;min-width:0}#find-stay .field{min-width:0}#find-stay :focus-visible{outline:2px solid #bf0005;outline-offset:3px}
+.sfera-booking{border-top:5px solid #bf0005}.sb-eyebrow,.sb-success h3{color:#bf0005}.sb-submit,.sb-done,#property-enquiry,#room-enquiry{background:#bf0005;color:#fff}.sb-submit:hover:not(:disabled),.sb-done:hover,#property-enquiry:hover,#room-enquiry:hover{background:#980004}.sb-form input:focus,.sb-form select:focus,.sb-form textarea:focus{border-color:#bf0005}.sb-consent input{accent-color:#bf0005}.sb-success dl{border-left:3px solid #bf0005;padding-left:16px}.property-tabs a[aria-current="page"]{background:#bf0005;color:white}
+@media(max-width:600px){#find-stay .direct-grid{grid-template-columns:1fr;gap:24px}#find-stay h2{font-size:clamp(38px,11vw,60px)}#find-stay .booking-card{padding:20px 16px}}
