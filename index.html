@@ -1493,7 +1493,7 @@ if(priAvailRoom) priAvailRoom.innerHTML=priRooms.map(r=>`<option value="${r.room
 function filterStays(destination){
  const cards=[...document.querySelectorAll('.portfolio-grid .property')];let count=0;
  cards.forEach(card=>{card.hidden=destination!=='All destinations'&&card.dataset.destination!==destination;if(!card.hidden)count++;});
- document.getElementById('stay-filter-status').textContent=count+' properties'+(destination==='All destinations'?'':' in '+destination)+'. Choose a property to explore rooms or request to book.';
+ document.getElementById('stay-filter-status').textContent=count+(count===1?' property':' properties')+(destination==='All destinations'?'':' in '+destination)+'. Choose a property to explore rooms or request to book.';
  document.getElementById('show-all-stays').hidden=destination==='All destinations';
  document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
 }
