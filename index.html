@@ -759,6 +759,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
 
 .form-error{background:#fff5f5;color:#620004}
 #stayRequestSubmit[disabled]{opacity:.55;cursor:wait}
+.property-photo{display:block;width:100%;height:320px;object-fit:cover}.apartment-entry .pri-card-actions{margin-top:18px}@media(max-width:600px){.property-photo{height:250px}}
 </style>
 </head>
 <body id="top">
@@ -943,7 +944,7 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
       <div class="micro"><span class="red-dot"></span>Portfolio preview</div>
       <div><h2>Independent properties. One operating standard.</h2></div>
       <div></div>
-      <p>The website can preserve each property’s identity while using “Operated by Sfera” as a visible trust mark.</p>
+      <p>Explore our properties and find your next stay. Each has its own character, with the care and consistency of Sfera.</p>
     </div>
 
     <div class="portfolio-grid">
@@ -952,9 +953,15 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
         <div class="property-art"><i></i><i></i><i></i></div>
         <div class="pri-card-actions"><button class="btn btn-black" data-analytics="view_pri_aparthotel" onclick="openPriProperty()">View property</button><button class="btn" data-analytics="check_pri_availability" onclick="openPriProperty('availability')">Check availability</button></div>
       </article>
-      <article class="property">
-        <div class="property-top"><div><div class="micro">Prishtina</div><h3>Prishtina City Apartments</h3><p>33 rooms & apartments · Center and Lakrishte</p></div><div class="trust">Operated by Sfera</div></div>
-        <div class="property-art"><i></i><i></i><i></i></div>
+      <article class="property apartment-entry">
+        <div class="property-top"><div><div class="micro">Prishtina · City center</div><h3>Prishtina City Apartments</h3><p>23 rooms · Explore the room galleries</p></div><div class="trust">Operated by Sfera</div></div>
+        <a href="/apartments?property=pca" aria-label="Explore Prishtina City Apartments"><img class="property-photo" src="/photos/pca-room-305/01.webp" alt="Interior of Prishtina City Apartments" width="1400" height="933" loading="lazy"></a>
+        <div class="pri-card-actions"><a class="btn btn-black" data-analytics="view_pca_gallery" href="/apartments?property=pca">Explore rooms &amp; photos</a></div>
+      </article>
+      <article class="property apartment-entry">
+        <div class="property-top"><div><div class="micro">Prishtina · Nartel</div><h3>Prishtina City Apartments 2</h3><p>10 apartments · Explore the room galleries</p></div><div class="trust">Operated by Sfera</div></div>
+        <a href="/apartments?property=pca2" aria-label="Explore Prishtina City Apartments 2"><img class="property-photo" src="/photos/nartel-61/01.webp" alt="Interior of Prishtina City Apartments 2" width="1400" height="933" loading="lazy"></a>
+        <div class="pri-card-actions"><a class="btn btn-black" data-analytics="view_pca2_gallery" href="/apartments?property=pca2">Explore rooms &amp; photos</a></div>
       </article>
       <article class="property">
         <div class="property-top"><div><div class="micro">Prizren</div><h3>Agara Stays</h3><p>15-room stay · Historic city center</p></div><div class="trust">Operated by Sfera</div></div>
