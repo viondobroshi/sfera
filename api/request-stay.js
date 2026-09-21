@@ -28,12 +28,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
 
-    const properties = {"pri":{"name":"PRI Aparthotel","rooms":["No preference","101","102","201","202","203","204","205","206","301","302","303","304","305","306","401","402","403","404","405"]},"pca":{"name":"Prishtina City Apartments","rooms":["No preference","PCA - Room 101","PCA - Room 102","PCA - Room 103 & 202","PCA - Room 104","PCA - Room 105 & 204","PCA - Room 106 & 205","PCA - Room 107 & 206","PCA - Room 108 & 207","PCA - Room 201","PCA - Room 203","PCA - Room 301","PCA - Room 302","PCA - Room 303","PCA - Room 304","PCA - Room 305","PCA - Room 306","PCA - Room 401","PCA - Room 402"]},"pca2":{"name":"Prishtina City Apartments 2","rooms":["No preference","Nartel 115-1","Nartel 115-2","Nartel 19","Nartel 28","Nartel 51","Nartel 52","Nartel 61","Nartel 62","Nartel 66","Nartel 89"]},"agara":{"name":"Agara Stays","rooms":["No preference"]},"hilltop":{"name":"Villa Hilltop","rooms":["No preference","Entire villa"]}};
+    const properties = {"pri":{"name":"PRI Aparthotel","rooms":["No preference","101","102","201","202","203","204","205","206","301","302","303","304","305","306","401","402","403","404","405"]},"pca":{"name":"Prishtina City Apartments","rooms":["No preference","PCA - Room 101","PCA - Room 102","PCA - Room 103 & 202","PCA - Room 104","PCA - Room 105 & 204","PCA - Room 106 & 205","PCA - Room 107 & 206","PCA - Room 108 & 207","PCA - Room 201","PCA - Room 203","PCA - Room 301","PCA - Room 302","PCA - Room 303","PCA - Room 304","PCA - Room 305","PCA - Room 306","PCA - Room 401","PCA - Room 402"]},"pca2":{"name":"Prishtina City Apartments 2","rooms":["No preference","Nartel 115-1","Nartel 115-2","Nartel 19","Nartel 28","Nartel 51","Nartel 52","Nartel 61","Nartel 62","Nartel 66","Nartel 89"]},"agara":{"name":"Agara Stays","rooms":["No preference", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]},"hilltop":{"name":"Villa Hilltop","rooms":["No preference","Entire villa"]}};
     const selectedProperty = Object.hasOwn(properties, propertyKey) ? properties[propertyKey] : null;
     if (!selectedProperty || !selectedProperty.rooms.includes(String(room)) || !/^[1-8]$/.test(String(guests))) {
       return res.status(400).json({ok:false,error:'Please select a valid property, room preference and guest count'});
     }
     const property = selectedProperty.name;
+    const apartmentNames = {"Nartel 19": "Silver Central Apartment", "Nartel 28": "Soft Stay Apartment", "Nartel 51": "Sonder Apartment", "Nartel 52": "Black Modern Apartment", "Nartel 61": "Blue Boutique Apartment", "Nartel 62": "Serene Apartment", "Nartel 66": "Crème Central Apartment", "Nartel 89": "Cinema Room Apartment", "Nartel 115-1": "Prishtina City Penthouse", "Nartel 115-2": "Cloud 19 Apartment"};
+    const roomLabel = propertyKey === "pca2" && apartmentNames[room] ? apartmentNames[room] + " (" + room + ")" : room;
     const guestEmail = String(email).trim();
     const guestPhone = String(phone).replace(/[\s().-]/g, '');
     if (!/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(guestEmail) ||
@@ -61,7 +63,7 @@ export default async function handler(req, res) {
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[char]));
     const acknowledgementEnabled = acknowledgementVersion === 'stay-v1';
-    const acknowledgementEmail = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#171717;line-height:1.6"><h2>Sfera — request received</h2><p>Hi ${escapeHtml(String(name).trim())},</p><p>Thank you for your stay request. We have received the following details:</p><p><strong>Property:</strong> ${escapeHtml(property)}<br><strong>Room:</strong> ${escapeHtml(room)}<br><strong>Check-in:</strong> ${escapeHtml(checkIn)}<br><strong>Check-out:</strong> ${escapeHtml(checkOut)}<br><strong>Guests:</strong> ${escapeHtml(guests || 'Not provided')}</p><p><strong>Your booking is not confirmed yet.</strong> Our team will check availability and contact you to confirm the details.</p><p>You can reply to this email or <a href="https://wa.me/38348101070">chat with Sfera on WhatsApp</a> if you need to update your request.</p><p>Thank you,<br>The Sfera team</p></div>`;
+    const acknowledgementEmail = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#171717;line-height:1.6"><h2>Sfera — request received</h2><p>Hi ${escapeHtml(String(name).trim())},</p><p>Thank you for your stay request. We have received the following details:</p><p><strong>Property:</strong> ${escapeHtml(property)}<br><strong>Room:</strong> ${escapeHtml(roomLabel)}<br><strong>Check-in:</strong> ${escapeHtml(checkIn)}<br><strong>Check-out:</strong> ${escapeHtml(checkOut)}<br><strong>Guests:</strong> ${escapeHtml(guests || 'Not provided')}</p><p><strong>Your booking is not confirmed yet.</strong> Our team will check availability and contact you to confirm the details.</p><p>You can reply to this email or <a href="https://wa.me/38348101070">chat with Sfera on WhatsApp</a> if you need to update your request.</p><p>Thank you,<br>The Sfera team</p></div>`;
     const acknowledgementWhatsAppBody = JSON.stringify({
       channelId: 534453,
       message: {
@@ -71,7 +73,7 @@ export default async function handler(req, res) {
           name: 'follow_up', languageCode: 'en',
           components: [{ type: 'body', parameters: [
             { type: 'text', text: String(name).trim().replace(/\s+/g, ' ').slice(0, 100) },
-            { type: 'text', text: `we have received your Sfera stay request for ${property}, ${String(room).trim()}, ${String(checkIn).trim()} to ${String(checkOut).trim()}. Your booking is not confirmed yet. Our team will check availability and contact you to confirm the details. You can reply here with any questions.` }
+            { type: 'text', text: `we have received your Sfera stay request for ${property}, ${String(roomLabel).trim()}, ${String(checkIn).trim()} to ${String(checkOut).trim()}. Your booking is not confirmed yet. Our team will check availability and contact you to confirm the details. You can reply here with any questions.` }
           ] }]
         }
       }
@@ -79,7 +81,7 @@ export default async function handler(req, res) {
     const details = `NEW WEBSITE STAY REQUEST
 
 Property: ${property}
-Room: ${String(room).trim()}
+Room: ${String(roomLabel).trim()}
 Name: ${String(name).trim()}
 Email: ${String(email).trim()}
 Phone: ${String(phone).trim()}
@@ -99,7 +101,7 @@ Submitted: ${submittedAt}`;
       name: String(name).trim(),
       phone: guestPhone,
       email: guestEmail,
-      room: String(room).trim(),
+      room: String(roomLabel).trim(),
       guests: String(guests).trim(),
       checkIn: String(checkIn).trim(),
       checkOut: String(checkOut).trim(),

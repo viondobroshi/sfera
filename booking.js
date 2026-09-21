@@ -63,13 +63,14 @@ window.SferaBooking=(()=>{
   e.preventDefault();if(busy)return;dates();validateContact();if(!form.reportValidity())return;
   const data=Object.fromEntries(new FormData(form)),property=properties.find(p=>p.id===data.property);if(!property)return;
   busy=true;submit.disabled=true;submit.textContent='Sending…';error.hidden=true;fallback.hidden=true;
-  const text=['Hello Sfera, I would like to request a booking.','Property: '+property.name,'Room: '+data.room,'Check-in: '+data.checkIn,'Check-out: '+data.checkOut,'Guests: '+data.guests,'Name: '+data.name,'Email: '+data.email,'Phone: '+data.phone,'Message: '+data.message].join('\n');
+  const roomLabel=field('room').selectedOptions[0].textContent;
+  const text=['Hello Sfera, I would like to request a booking.','Property: '+property.name,'Room: '+roomLabel,'Check-in: '+data.checkIn,'Check-out: '+data.checkOut,'Guests: '+data.guests,'Name: '+data.name,'Email: '+data.email,'Phone: '+data.phone,'Message: '+data.message].join('\n');
   fallback.href='https://wa.me/38348101070?text='+encodeURIComponent(text);
   try{
    const response=await fetch('/api/request-stay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}),result=await response.json().catch(()=>({}));
    if(!response.ok||!result.ok)throw Error(result.error||'Delivery failed');
    const summary=success.querySelector('dl');summary.replaceChildren();
-   for(const [label,value] of [['Property',property.name],['Room',data.room],['Dates',data.checkIn+' → '+data.checkOut],['Guests',data.guests]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;summary.append(dt,dd);}
+   for(const [label,value] of [['Property',property.name],['Room',roomLabel],['Dates',data.checkIn+' → '+data.checkOut],['Guests',data.guests]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;summary.append(dt,dd);}
    form.hidden=true;success.hidden=false;dialog.scrollTop=0;success.focus({preventScroll:true});form.reset();validateContact();if(window.gtag)window.gtag('event','generate_lead',{lead_type:'stay',property:property.name,room:data.room});
   }catch{error.textContent='We couldn’t confirm delivery. Try again or send this request to Sfera on WhatsApp.';error.hidden=false;fallback.hidden=false;error.scrollIntoView({block:'nearest'});}
   finally{busy=false;submit.disabled=false;submit.textContent='Send booking request';}

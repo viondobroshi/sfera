@@ -5,6 +5,13 @@ const roomDialog=document.getElementById('room-dialog');
 const lightbox=document.getElementById('lightbox');
 const cache=new Map();
 let currentRoom=null,currentPhotos=[],photoIndex=0,requestNumber=0;
+function factList(facts,className){
+ const list=document.createElement('dl');list.className=className;
+ for(const [label,value] of Object.entries(facts||{})){const item=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;item.append(dt,dd);list.append(item);}
+ return list;
+}
+const roomDetails=document.createElement('div');roomDetails.className='room-details';document.getElementById('group-note').after(roomDetails);
+
 function closeRoom(){requestNumber++;roomDialog.close();}
 document.getElementById('close-room').addEventListener('click',closeRoom);
 roomDialog.addEventListener('cancel',()=>{requestNumber++;});
@@ -20,6 +27,7 @@ async function openRoom(room){
   const request=++requestNumber;currentRoom=room;currentPhotos=[];
   document.getElementById('room-title').textContent=room.name;
   document.getElementById('room-property').textContent=property.name;
+  roomDetails.replaceChildren(factList(room.details,'room-facts'));roomDetails.hidden=!room.details;
   document.getElementById('group-note').hidden=!room.shared;
   document.getElementById('group-note').textContent=room.name.includes('&')?'This collection covers both room numbers. Our team will confirm your assigned room.':'Property photography is shown; our team will confirm the exact room details.';
   document.getElementById('room-enquiry').onclick=()=>window.SferaBooking.open(property.id,room.value);
@@ -29,9 +37,9 @@ async function openRoom(room){
     if(room.photos)cache.set(room.id,{photos:room.photos});
     if(!cache.has(room.id)){const response=await fetch('/photos/'+room.id+'.json');if(!response.ok)throw new Error('Photo request failed');cache.set(room.id,await response.json());}
     if(request!==requestNumber||!roomDialog.open)return;
-    const data=cache.get(room.id);currentPhotos=data.photos;
+    const data=cache.get(room.id);currentPhotos=data.photos||[];
     currentPhotos.forEach((photo,index)=>{const button=document.createElement('button');button.setAttribute('aria-label','Enlarge '+room.name+' photo '+(index+1));const img=document.createElement('img');img.src=photo.src;img.alt=room.name+' — photo '+(index+1);img.width=photo.width;img.height=photo.height;img.loading=index?'lazy':'eager';img.decoding='async';img.addEventListener('error',()=>{img.classList.add('photo-unavailable');img.alt='Photo unavailable — '+room.name;});button.append(img);button.addEventListener('click',()=>{showPhoto(index);lightbox.showModal();});grid.append(button);});
-    status.textContent=currentPhotos.length+' photos';
+    status.textContent=currentPhotos.length?currentPhotos.length+' photos':'Room photos are coming soon. You can request this room below.';
   }catch(error){if(request===requestNumber)status.textContent='We couldn’t load these photos. Please close this gallery and try again.';}
 }
 async function loadRooms(){
@@ -43,10 +51,11 @@ async function loadRooms(){
     const tabs=document.getElementById('property-tabs');properties.forEach(p=>{const a=document.createElement('a');a.href='/stays/'+p.id;a.textContent=p.name;if(p.id===property.id)a.setAttribute('aria-current','page');tabs.append(a);});
     document.getElementById('property-enquiry').onclick=()=>window.SferaBooking.open(property.id);
     const rooms=property.rooms;
-    document.getElementById('room-count').textContent=rooms.length?rooms.length+' photo collections':'Property details';
+    const propertyFacts=document.createElement('section');propertyFacts.className='property-facts';propertyFacts.setAttribute('aria-label','Stay information');const factsHeading=document.createElement('h2');factsHeading.textContent='Your stay';propertyFacts.append(factsHeading,factList(property.facts,'stay-facts'));document.getElementById('property-tabs').after(propertyFacts);
+    document.getElementById('room-count').textContent=rooms.length?rooms.length+(property.id==='agara'?' rooms':' photo collections'):'Property details';
     const grid=document.getElementById('room-grid');
     if(!rooms.length){const notice=document.createElement('div');notice.className='gallery-empty';const h=document.createElement('h3');h.textContent=property.name;const p=document.createElement('p');p.textContent=property.summary+'. Photography and room details are coming soon. You can request your dates now; our team will confirm the available accommodation.';notice.append(h,p);grid.append(notice);}
-    rooms.forEach(room=>{const button=document.createElement('button');button.className='room-card';button.setAttribute('aria-haspopup','dialog');const img=document.createElement('img');img.src=room.cover;img.alt=room.name;img.width=640;img.height=480;img.loading='lazy';img.decoding='async';img.addEventListener('error',()=>{img.classList.add('photo-unavailable');img.alt='Photo unavailable — '+room.name;});const label=document.createElement('div');label.className='card-label';const heading=document.createElement('h3');heading.textContent=room.name;const symbol=document.createElement('span');symbol.textContent='+';symbol.setAttribute('aria-hidden','true');label.append(heading,symbol);const count=document.createElement('p');count.textContent=(room.count||room.photos.length)+' photos · View gallery';button.append(img,label,count);button.addEventListener('click',()=>openRoom(room));grid.append(button);});
+    rooms.forEach(room=>{const button=document.createElement('button');button.className='room-card';button.setAttribute('aria-haspopup','dialog');const img=document.createElement(room.cover?'img':'div');if(room.cover)img.src=room.cover;else{img.className='room-photo-placeholder';img.textContent='Photos coming soon';}img.alt=room.name;img.width=640;img.height=480;img.loading='lazy';img.decoding='async';img.addEventListener('error',()=>{img.classList.add('photo-unavailable');img.alt='Photo unavailable — '+room.name;});const label=document.createElement('div');label.className='card-label';const heading=document.createElement('h3');heading.textContent=room.name;const symbol=document.createElement('span');symbol.textContent='+';symbol.setAttribute('aria-hidden','true');label.append(heading,symbol);const count=document.createElement('p');const photoCount=room.count||room.photos?.length||0;count.textContent=photoCount?photoCount+' photos · View room':'View room details';const details=document.createElement('p');details.className='room-card-details';details.textContent=room.details?[room.details['Guests']+' guests',room.details['Beds']].join(' · '):'';button.append(img,label,details,count);button.addEventListener('click',()=>openRoom(room));grid.append(button);});
     status.hidden=true;
   }catch(error){status.textContent='We couldn’t load the room galleries. Please refresh to try again.';}
 }
