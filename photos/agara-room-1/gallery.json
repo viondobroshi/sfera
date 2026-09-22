@@ -1,0 +1,64 @@
+{
+  "photos": [
+    {
+      "src": "/photos/agara-room-1/01.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "/photos/agara-room-1/02.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "/photos/agara-room-1/03.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "/photos/agara-room-1/04.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "/photos/agara-room-1/05.webp",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "/photos/agara-room-1/06.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/07.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/08.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/09.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/10.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/11.webp",
+      "width": 960,
+      "height": 1200
+    },
+    {
+      "src": "/photos/agara-room-1/12.webp",
+      "width": 960,
+      "height": 1200
+    }
+  ]
+}
