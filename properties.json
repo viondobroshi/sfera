@@ -963,14 +963,75 @@
     "name": "Agara Stays",
     "location": "Prizren",
     "summary": "15-room stay · Historic city center",
-    "cover": null,
+    "cover": "/photos/agara-room-12/cover.webp",
     "rooms": [
       {
         "id": "agara-1",
         "name": "Room 1",
         "value": "1",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-1/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-1/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-1/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-1/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-1/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-1/06.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-1/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Bunk Bed Studio",
           "Guests": "2",
@@ -979,14 +1040,77 @@
           "Entrance": "A",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-1/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-2",
         "name": "Room 2",
         "value": "2",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-2/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/08.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-2/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-2/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-2/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-2/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Bunk Bed Studio",
           "Guests": "2",
@@ -995,14 +1119,77 @@
           "Entrance": "A",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-2/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-3",
         "name": "Room 3",
         "value": "3",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-3/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-3/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-3/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-3/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-3/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-3/06.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-3/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1011,14 +1198,77 @@
           "Entrance": "A",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-3/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-4",
         "name": "Room 4",
         "value": "4",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-4/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-4/09.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-4/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-4/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-4/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Standard Room",
           "Guests": "2",
@@ -1027,14 +1277,77 @@
           "Entrance": "A",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-4/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-5",
         "name": "Room 5",
         "value": "5",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-5/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-5/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-5/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-5/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-5/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-5/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-5/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1043,14 +1356,77 @@
           "Entrance": "A",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-5/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-6",
         "name": "Room 6",
         "value": "6",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-6/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-6/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-6/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-6/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-6/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-6/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Standard Room",
           "Guests": "2",
@@ -1059,14 +1435,77 @@
           "Entrance": "A",
           "Floor": "2",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-6/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-7",
         "name": "Room 7",
         "value": "7",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-7/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-7/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-7/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-7/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-7/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-7/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-7/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1075,14 +1514,77 @@
           "Entrance": "A",
           "Floor": "2",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-7/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-8",
         "name": "Room 8",
         "value": "8",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-8/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-8/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-8/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-8/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-8/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-8/06.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-8/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1091,14 +1593,77 @@
           "Entrance": "A",
           "Floor": "2",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-8/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-9",
         "name": "Room 9",
         "value": "9",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-9/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-9/08.webp",
+            "width": 800,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-9/09.webp",
+            "width": 800,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-9/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-9/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-9/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Standard Room",
           "Guests": "2",
@@ -1107,14 +1672,77 @@
           "Entrance": "A",
           "Floor": "2",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-9/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-10",
         "name": "Room 10",
         "value": "10",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-10/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-10/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-10/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-10/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-10/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-10/12.webp",
+            "width": 1600,
+            "height": 1067
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1123,14 +1751,77 @@
           "Entrance": "A",
           "Floor": "2",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-10/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-11",
         "name": "Room 11",
         "value": "11",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-11/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-11/07.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-11/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-11/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-11/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-11/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-11/12.webp",
+            "width": 1600,
+            "height": 1067
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Standard Room",
           "Guests": "2",
@@ -1139,14 +1830,87 @@
           "Entrance": "A",
           "Floor": "3",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-11/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-12",
         "name": "Room 12",
         "value": "12",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-12/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-12/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/12.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/13.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-12/14.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 14,
         "details": {
           "Room type": "Castle View Suite",
           "Guests": "3",
@@ -1155,14 +1919,77 @@
           "Entrance": "A",
           "Floor": "3",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-12/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-13",
         "name": "Room 13",
         "value": "13",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-13/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-13/09.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-13/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-13/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-13/12.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Deluxe Room",
           "Guests": "3",
@@ -1171,14 +1998,87 @@
           "Entrance": "B",
           "Floor": "1",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-13/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-14",
         "name": "Room 14",
         "value": "14",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-14/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/06.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-14/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/08.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-14/09.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/10.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/11.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-14/12.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-14/13.webp",
+            "width": 1500,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-14/14.webp",
+            "width": 960,
+            "height": 1200
+          }
+        ],
+        "count": 14,
         "details": {
           "Room type": "Panoramic Suite",
           "Guests": "2",
@@ -1187,14 +2087,77 @@
           "Entrance": "B",
           "Floor": "3",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-14/cover.webp",
+        "shared": false
       },
       {
         "id": "agara-15",
         "name": "Room 15",
         "value": "15",
-        "photos": [],
-        "count": 0,
+        "photos": [
+          {
+            "src": "/photos/agara-room-15/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/04.webp",
+            "width": 800,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-15/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/08.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/agara-room-15/09.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-15/10.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-15/11.webp",
+            "width": 960,
+            "height": 1200
+          },
+          {
+            "src": "/photos/agara-room-15/12.webp",
+            "width": 800,
+            "height": 1200
+          }
+        ],
+        "count": 12,
         "details": {
           "Room type": "Standard Room",
           "Guests": "2",
@@ -1203,7 +2166,9 @@
           "Entrance": "B",
           "Floor": "3",
           "Kitchenette": "Yes"
-        }
+        },
+        "cover": "/photos/agara-room-15/cover.webp",
+        "shared": false
       }
     ],
     "facts": {
