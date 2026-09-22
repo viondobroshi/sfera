@@ -1372,15 +1372,80 @@
         "id": "pri-403",
         "name": "Room 403",
         "value": "403",
-        "cover": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=",
+        "cover": "/photos/pri-room-403/cover.webp",
         "photos": [
           {
-            "src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/826556673.jpg?k=e70b3d29c309a3489cb7edcc04c63da23d6ecadcff79d54840d17d64fab3fa7b&o=",
-            "width": 1200,
-            "height": 800
+            "src": "/photos/pri-room-403/01.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/02.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/03.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/04.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/05.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/06.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/07.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/08.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/09.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/10.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/11.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/12.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/13.webp",
+            "width": 1600,
+            "height": 1067
+          },
+          {
+            "src": "/photos/pri-room-403/14.webp",
+            "width": 1067,
+            "height": 1600
           }
         ],
-        "shared": true
+        "shared": false
       },
       {
         "id": "pri-404",
