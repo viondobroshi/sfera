@@ -124,6 +124,11 @@ h1{font-size:clamp(58px,7vw,112px);line-height:.88;letter-spacing:-.055em;margin
 .audience h3{font-size:clamp(42px,4.5vw,70px);font-weight:400;line-height:.95;letter-spacing:-.05em;margin:14px 0 20px;max-width:560px}
 .audience p{max-width:520px;color:#4d5357;font-size:16px}
 .audience.dark p{color:#b7bdc3}
+.audience-photo{position:relative;display:block;height:190px;margin:28px 0 24px;overflow:hidden;border:1px solid currentColor}
+.audience-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.audience-photo:hover img{transform:scale(1.025)}
+.audience-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.65))}
+.audience-photo span{position:absolute;z-index:2;left:16px;bottom:14px;color:white;font-size:9px;text-transform:uppercase;letter-spacing:.12em}
 .audience-links{display:flex;gap:18px;flex-wrap:wrap;text-transform:uppercase;font-size:10px;letter-spacing:.12em;font-weight:700}
 .audience-links a{border-bottom:1px solid currentColor;padding-bottom:4px}
 .field-lines{position:absolute;right:-90px;top:60px;width:400px;height:400px;opacity:.38}
@@ -162,23 +167,13 @@ h1{font-size:clamp(58px,7vw,112px);line-height:.88;letter-spacing:-.055em;margin
 .type-card{border:1px solid var(--black);padding:30px;min-height:390px;display:flex;flex-direction:column;justify-content:space-between}
 .type-card h3{font-size:38px;line-height:.97;font-weight:400;letter-spacing:-.04em;margin:18px 0}
 .type-card p{font-size:14px;color:#5c6165;max-width:360px}
+.type-photo{display:block;height:170px;margin:26px -1px 0;position:relative;overflow:hidden;border:1px solid var(--black)}
+.type-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.type-photo:hover img{transform:scale(1.03)}
+.type-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.58))}
+.type-photo span{position:absolute;z-index:2;left:14px;bottom:12px;color:white;font-size:9px;text-transform:uppercase;letter-spacing:.11em}
 .type-card ul{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
 .type-card li{padding:10px 0;border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
-
-.signature-stays{background:#111;color:white;overflow:hidden}
-.signature-stays .section-head p{color:#b8bdc0}
-.signature-stays .micro{color:var(--sfera-grey)}
-.signature-gallery{display:grid;grid-template-columns:1.18fr .82fr;gap:14px;align-items:start}
-.signature-card{position:relative;display:block;min-height:610px;overflow:hidden;background:#252525;border:1px solid rgba(255,255,255,.3);color:white}
-.signature-card:nth-child(2){min-height:520px;margin-top:90px}
-.signature-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease}
-.signature-card:first-child img{object-position:center 58%}
-.signature-card:nth-child(2) img{object-position:center}
-.signature-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04) 32%,rgba(0,0,0,.78) 100%)}
-.signature-card:hover img{transform:scale(1.025);filter:saturate(1.04)}
-.signature-caption{position:absolute;z-index:2;left:30px;right:30px;bottom:28px;display:flex;justify-content:space-between;gap:24px;align-items:end}
-.signature-caption h3{font-size:clamp(34px,3.6vw,58px);font-weight:400;line-height:.95;letter-spacing:-.045em;margin:8px 0 0;max-width:520px}
-.signature-caption span{font-size:9px;line-height:1.45;text-transform:uppercase;letter-spacing:.13em;text-align:right;max-width:150px}
 
 .trust-section{background:var(--paper)}
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;min-height:600px;border:1px solid var(--black)}
@@ -273,7 +268,6 @@ footer a,footer p{font-size:12px;color:#bbbfc2;margin:8px 0;display:block}
   .hero-grid{min-height:auto} .hero-copy{padding:70px 30px 60px} .hero-visual{min-height:560px;border-left:0;border-top:1px solid black}
   .steps{grid-template-columns:repeat(2,1fr)} .step:last-child{grid-column:1/-1}
   .type-grid{grid-template-columns:1fr}
-  .signature-card{min-height:540px}.signature-card:nth-child(2){min-height:460px;margin-top:80px}
   .footer-grid{grid-template-columns:1fr 1fr}
   .mobile-panel{position:fixed;top:108px;left:0;right:0;background:var(--sfera-grey);z-index:45;border-bottom:1px solid black;padding:24px;display:none}
   .mobile-panel.open{display:block}
@@ -287,8 +281,9 @@ footer a,footer p{font-size:12px;color:#bbbfc2;margin:8px 0;display:block}
   .proof-grid{grid-template-columns:1fr 1fr} .proof-item:nth-child(2){border-right:0} .proof-item:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .section{padding:78px 0} .section-head{gap:25px}
   .audience-grid{grid-template-columns:1fr} .audience + .audience{border-left:0;border-top:1px solid black} .audience{min-height:430px;padding:28px}
+  .audience-photo{height:180px}
   .steps{grid-template-columns:1fr} .step:last-child{grid-column:auto} .step{min-height:250px}
-  .signature-gallery{grid-template-columns:1fr;gap:12px}.signature-card,.signature-card:nth-child(2){min-height:430px;margin-top:0}.signature-caption{left:20px;right:20px;bottom:20px;display:block}.signature-caption span{display:block;text-align:left;margin-top:12px}
+  .type-photo{height:190px}
   .portfolio-grid{grid-template-columns:1fr} .property{grid-column:auto;min-height:300px}
   .trust-copy{padding:34px 28px} .trust-row{grid-template-columns:1fr;gap:6px}
   .direct-grid{gap:35px} .booking-form,.partner-form .booking-form{grid-template-columns:1fr} .field.full{grid-column:auto}
@@ -910,19 +905,14 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
           <h3>Stay with Sfera.</h3>
           <p>Discover professionally operated city stays and selected villas with clear room information, consistent standards and a simple path from discovery to confirmed booking.</p>
         </div>
+        <a class="audience-photo" href="/stays/pca2" aria-label="Explore Prishtina City Penthouse at PCA2">
+          <img src="/photos/nartel-115-1/11.webp" alt="Freestanding bath overlooking Prishtina from the PCA2 penthouse" width="1120" height="1400" loading="lazy" decoding="async">
+          <span>PCA2 · Penthouse with a view</span>
+        </a>
         <div class="audience-links">
           <a href="#portfolio">Explore portfolio</a>
           <a href="#" onclick="openStaySearch();return false;">Check availability</a>
         </div>
-        <svg class="field-lines" viewBox="0 0 400 400" aria-hidden="true">
-          <path d="M200,35 C110,55 80,135 80,200 C80,270 112,342 200,365"/>
-          <path d="M200,55 C130,70 105,135 105,200 C105,265 130,330 200,345"/>
-          <path d="M200,82 C150,90 132,145 132,200 C132,255 150,310 200,318"/>
-          <path d="M200,35 C290,55 320,135 320,200 C320,270 288,342 200,365"/>
-          <path d="M200,55 C270,70 295,135 295,200 C295,265 270,330 200,345"/>
-          <path d="M200,82 C250,90 268,145 268,200 C268,255 250,310 200,318"/>
-          <circle cx="200" cy="55" r="4"/><circle cx="105" cy="200" r="4"/><circle cx="295" cy="200" r="4"/><circle cx="200" cy="345" r="4"/>
-        </svg>
       </article>
 
       <article class="audience dark">
@@ -931,19 +921,14 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
           <h3>Put the asset in operator hands.</h3>
           <p>From feasibility and pre-opening to revenue management, guest support, housekeeping and quality control, Sfera can join a project before opening or take over an operating property.</p>
         </div>
+        <a class="audience-photo" href="/stays/pri" aria-label="Explore PRI Aparthotel, operated by Sfera">
+          <img src="/photos/pri-room-405/cover.webp" alt="Professionally prepared guest room at PRI Aparthotel" width="640" height="480" loading="lazy" decoding="async">
+          <span>PRI Aparthotel · Operated by Sfera</span>
+        </a>
         <div class="audience-links">
           <a href="#what-we-do">See operating model</a>
           <a href="#partner">Submit property</a>
         </div>
-        <svg class="field-lines" viewBox="0 0 400 400" aria-hidden="true">
-          <path d="M200,35 C110,55 80,135 80,200 C80,270 112,342 200,365"/>
-          <path d="M200,55 C130,70 105,135 105,200 C105,265 130,330 200,345"/>
-          <path d="M200,82 C150,90 132,145 132,200 C132,255 150,310 200,318"/>
-          <path d="M200,35 C290,55 320,135 320,200 C320,270 288,342 200,365"/>
-          <path d="M200,55 C270,70 295,135 295,200 C295,265 270,330 200,345"/>
-          <path d="M200,82 C250,90 268,145 268,200 C268,255 250,310 200,318"/>
-          <circle cx="200" cy="55" r="4"/><circle cx="105" cy="200" r="4"/><circle cx="295" cy="200" r="4"/><circle cx="200" cy="345" r="4"/>
-        </svg>
       </article>
     </div>
   </div>
@@ -980,44 +965,28 @@ input,select,textarea{font-size:16px} /* prevents iOS auto-zoom */
     <div class="type-grid">
       <div class="type-card">
         <div><div class="micro">01 · Urban hospitality</div><h3>Apartment buildings & serviced apartments.</h3><p>Well-located residential assets operated with hotel-grade systems, distribution and guest service.</p></div>
+        <a class="type-photo" href="/stays/pca" aria-label="Explore PCA Room 304">
+          <img src="/photos/pca-room-304/09.webp" alt="Freestanding bath and bedroom in PCA Room 304" width="1400" height="934" loading="lazy" decoding="async">
+          <span>PCA · Room 304</span>
+        </a>
         <ul><li>Apartment buildings</li><li>Serviced apartments</li><li>Existing short-term rental buildings</li></ul>
       </div>
       <div class="type-card">
         <div><div class="micro">02 · Hospitality assets</div><h3>Aparthotels, boutique hotels & conversions.</h3><p>Assets where professional operating systems and commercial strategy can materially improve performance.</p></div>
+        <a class="type-photo" href="/stays/pri" aria-label="Explore PRI Aparthotel">
+          <img src="/photos/pri-room-405/01.webp" alt="Contemporary room at PRI Aparthotel" width="1400" height="933" loading="lazy" decoding="async">
+          <span>PRI Aparthotel · Prishtina</span>
+        </a>
         <ul><li>Aparthotels</li><li>Boutique hotels</li><li>Hotels suitable for conversion</li></ul>
       </div>
       <div class="type-card">
         <div><div class="micro">03 · Selected leisure</div><h3>Premium villas with real commercial appeal.</h3><p>Not an open marketplace: Sfera evaluates location, design, privacy, amenities and operating feasibility before accepting a villa.</p></div>
+        <a class="type-photo" href="/stays/hilltop" aria-label="Explore Villa Hilltop wellness facilities">
+          <img src="/photos/hilltop-villa/17.webp" alt="Private Jacuzzi at Villa Hilltop in Prevallë" width="1600" height="1067" loading="lazy" decoding="async">
+          <span>Villa Hilltop · Private wellness</span>
+        </a>
         <ul><li>Strong destination appeal</li><li>Distinctive design or setting</li><li>Operational feasibility</li></ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section signature-stays" aria-labelledby="signature-title">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="micro"><span class="red-dot"></span>Signature stays</div>
-      <div><h2 id="signature-title">Rooms guests remember.</h2></div>
-      <div></div>
-      <p>Distinctive details turn a city stay into an experience. Explore two of Sfera’s most memorable rooms in Prishtina.</p>
-    </div>
-
-    <div class="signature-gallery">
-      <a class="signature-card" href="/stays/pca2" aria-label="Explore Prishtina City Penthouse at Prishtina City Apartments 2">
-        <img src="/photos/nartel-115-1/11.webp" alt="Freestanding bath overlooking the Prishtina skyline in Prishtina City Penthouse" width="1120" height="1400" loading="lazy" decoding="async">
-        <div class="signature-caption">
-          <div><div class="micro">PCA2 · Floor 18</div><h3>Prishtina City Penthouse.</h3></div>
-          <span>Freestanding bath<br>Skyline views</span>
-        </div>
-      </a>
-      <a class="signature-card" href="/stays/pca" aria-label="Explore Room 304 at Prishtina City Apartments">
-        <img src="/photos/pca-room-304/09.webp" alt="Freestanding bath beside the bedroom in PCA Room 304" width="1400" height="934" loading="lazy" decoding="async">
-        <div class="signature-caption">
-          <div><div class="micro">PCA · Room 304</div><h3>Superior Suite.</h3></div>
-          <span>Private bath<br>City-center stay</span>
-        </div>
-      </a>
     </div>
   </div>
 </section>
